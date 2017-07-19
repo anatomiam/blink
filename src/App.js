@@ -1,6 +1,4 @@
-// import _ from 'lodash'
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 const alphabet = [
@@ -32,32 +30,52 @@ const alphabet = [
   'z'
 ]
 
+let interval
+
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      letter: '',
       sentence: [],
       loop: true,
+      counter: 0
     }
 
-    this.handleFlip = this.handleFlip.bind(this)
+    this.handleStart = this
+      .handleStart
+      .bind(this)
+
+    this.handleStop = this
+      .handleStop
+      .bind(this)
+      
+    this.nextLetter = this
+      .nextLetter
+      .bind(this)
   }
 
-  handleFlip() {
+  nextLetter() {
     this.setState({
-      loop: !this.state.loop
+      letter: alphabet[this.state.counter % alphabet.length],
+      counter: this.state.counter + 1
     })
   }
-  
+
+  handleStart() {
+    interval = setInterval(this.nextLetter, 500)
+  }
+
+  handleStop() {
+    clearInterval(interval)
+  }
+
   render() {
-    console.log(this.state.loop)
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo"/>
-        </div>
-        <h2>{this.state.loop ? alphabet : null}</h2>
-        <button onClick={this.handleFlip}>flip</button>
+        <h2>{this.state.letter}</h2>
+        <button onClick={this.handleStart}>start</button>
+        <button onClick={this.handleStop}>stop</button>
       </div>
     );
   }
