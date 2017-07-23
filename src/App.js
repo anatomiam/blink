@@ -30,7 +30,7 @@ const alphabet = [
   'z'
 ]
 
-let interval
+let interval = 0
 
 class App extends Component {
   constructor(props) {
@@ -49,10 +49,44 @@ class App extends Component {
     this.handleStop = this
       .handleStop
       .bind(this)
-      
+
     this.nextLetter = this
       .nextLetter
       .bind(this)
+
+    this.addLetter = this
+      .addLetter
+      .bind(this)
+    this.handleKeyPress = this
+      .handleKeyPress
+      .bind(this)
+  }
+
+  handleKeyPress(e) {
+    console.log(this.state.sentence)
+    if (e.key === 'ArrowDown') {
+      // this.handleStop()
+      this.addLetter()
+      this.handleStart()
+    } else if (e.key === 'ArrowUp') {
+      console.log('going up...')
+    } else if (e.key === 'ArrowLeft') {
+      console.log('going left.....')
+    } else if (e.key === 'ArrowRight') {
+      console.log('going right....')
+    } else {
+      console.log('else')
+    }
+  }
+  addLetter() {
+    const newSentence = this.state.sentence.slice()
+    newSentence.push(this.state.letter)
+
+    this.setState({
+      sentence: newSentence,
+      letter: alphabet[0],
+      counter: 0
+    })
   }
 
   nextLetter() {
@@ -74,8 +108,7 @@ class App extends Component {
     return (
       <div className="App">
         <h2>{this.state.letter}</h2>
-        <button onClick={this.handleStart}>start</button>
-        <button onClick={this.handleStop}>stop</button>
+        <button onKeyDown={this.handleKeyPress}>focus</button>
       </div>
     );
   }
