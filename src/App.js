@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 
 const alphabet = [
+  'space',
   'a',
   'b',
   'c',
@@ -41,74 +42,81 @@ class App extends Component {
       loop: true,
       counter: 0
     }
-
-    this.handleStart = this
-      .handleStart
-      .bind(this)
-
-    this.handleStop = this
-      .handleStop
-      .bind(this)
-
-    this.nextLetter = this
-      .nextLetter
-      .bind(this)
-
-    this.addLetter = this
-      .addLetter
-      .bind(this)
-    this.handleKeyPress = this
-      .handleKeyPress
-      .bind(this)
   }
 
-  handleKeyPress(e) {
+  componentDidUpdate() {
     console.log(this.state.sentence)
+  }
+
+  handleKeyPress = (e) => {
     if (e.key === 'ArrowDown') {
-      // this.handleStop()
+      this.handleStop()
       this.addLetter()
       this.handleStart()
     } else if (e.key === 'ArrowUp') {
-      console.log('going up...')
+      this.handleStart()
     } else if (e.key === 'ArrowLeft') {
-      console.log('going left.....')
+      this.stepPrevious()
     } else if (e.key === 'ArrowRight') {
-      console.log('going right....')
+      this.stepNext()
     } else {
       console.log('else')
     }
   }
-  addLetter() {
-    const newSentence = this.state.sentence.slice()
+  addLetter = () => {
+    const newSentence = this
+      .state
+      .sentence
+      .slice()
+    
     newSentence.push(this.state.letter)
 
+    this.setState({sentence: newSentence, letter: alphabet[0], counter: 0})
+    console.log('added letter')
+  }
+
+  nextLetter = () => {
     this.setState({
-      sentence: newSentence,
-      letter: alphabet[0],
-      counter: 0
+      letter: alphabet[this.state.counter],
+      counter: this.state.counter + 1 % alphabet.length
     })
   }
 
-  nextLetter() {
+  previousLetter = () => {
+    console.log(this.state.counter)
     this.setState({
-      letter: alphabet[this.state.counter % alphabet.length],
-      counter: this.state.counter + 1
+      letter: alphabet[this.state.counter],
+      counter: this.state.counter - 1 % alphabet.length
     })
   }
 
-  handleStart() {
+  handleStart = () => {
     interval = setInterval(this.nextLetter, 500)
+    console.log('start')
   }
 
-  handleStop() {
-    clearInterval(interval)
+  handleStop = () => {
+    if (interval) {
+      clearInterval(interval)
+    }
+  }
+
+  stepNext = () => {
+    this.handleStop()
+    this.nextLetter()
+  }
+
+  stepPrevious = () => {
+    this.handleStop()
+    this.previousLetter()
   }
 
   render() {
     return (
       <div className="App">
-        <h2>{this.state.letter}</h2>
-        <button onKeyDown={this.handleKeyPress}>focus</button>
+        <h1>{this.state.letter}</h1>
+        <button autoFocus onKeyDown={this.handleKeyPress}>FOCUS</button>
+        <h2>{this.state.sentence.map((letter) => letter === 'space' ? '_' : letter).join('')}</h2>
       </div>
     );
   }
