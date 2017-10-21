@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 
 const alphabet = [
+  'undo',
   'space',
   'a',
   'b',
@@ -45,7 +46,7 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    console.log(this.state.sentence)
+    console.log(this.state.sentence.join(''))
   }
 
   handleKeyPress = (e) => {
@@ -54,39 +55,53 @@ class App extends Component {
       this.addLetter()
       this.handleStart()
     } else if (e.key === 'ArrowUp') {
+      this.handleStop()
       this.handleStart()
     } else if (e.key === 'ArrowLeft') {
       this.stepPrevious()
     } else if (e.key === 'ArrowRight') {
       this.stepNext()
+    } else if (e.key === 'q') {
+      this.handleStop()
     } else {
       console.log('else')
     }
   }
+
   addLetter = () => {
     const newSentence = this
       .state
       .sentence
       .slice()
-    
-    newSentence.push(this.state.letter)
 
-    this.setState({sentence: newSentence, letter: alphabet[0], counter: 0})
+    if (this.state.letter === 'space') {
+      newSentence.push(' ')
+    } else if (this.state.letter === 'undo') {
+      newSentence.pop()
+    } else {
+      newSentence.push(this.state.letter)
+    }
+
+    this.setState({
+      sentence: newSentence, 
+      letter: alphabet[0], 
+      counter: 0})
     console.log('added letter')
   }
 
   nextLetter = () => {
+    console.log((this.state.counter + 1) % alphabet.length)
     this.setState({
       letter: alphabet[this.state.counter],
-      counter: this.state.counter + 1 % alphabet.length
+      counter: (this.state.counter + 1) % alphabet.length
     })
   }
 
   previousLetter = () => {
     console.log(this.state.counter)
     this.setState({
-      letter: alphabet[this.state.counter],
-      counter: this.state.counter - 1 % alphabet.length
+      letter: alphabet[this.state.counter - 2],
+      counter: (this.state.counter - 1) % alphabet.length
     })
   }
 
@@ -113,10 +128,20 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>{this.state.letter}</h1>
-        <button autoFocus onKeyDown={this.handleKeyPress}>FOCUS</button>
-        <h2>{this.state.sentence.map((letter) => letter === 'space' ? '_' : letter).join('')}</h2>
+      <div className='app'>
+        <div className='children'>
+          <h1>{this.state.letter}</h1>
+        </div>
+        <div className='children'>
+          <button autoFocus onKeyDown={this.handleKeyPress}>FOCUS</button>
+        </div>
+        <div className='children'>
+          <h2>{this
+              .state
+              .sentence
+              .join('')}
+          </h2>
+        </div>
       </div>
     );
   }
