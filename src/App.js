@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
+import { morse } from './morse'
 
 const alphabet = [
   'undo',
@@ -43,6 +44,7 @@ class App extends Component {
       loop: true,
       counter: 0
     }
+    console.log(morse)
   }
 
   componentDidUpdate() {
