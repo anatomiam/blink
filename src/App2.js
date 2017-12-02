@@ -17,6 +17,8 @@ class App2 extends Component {
 
   componentDidMount = () => {
     this.select("FOCUS");
+    this.deselect();
+    this.select("FOCUS");
   };
 
   buildTree = (data, parent) => {
@@ -114,10 +116,16 @@ class App2 extends Component {
     }
   };
 
+  deselect = () => {
+    const selected_element = document.querySelector(".selected");
+    selected_element.classList.remove("selected");
+    // console.log(selected_element.className);
+  };
+  
   select = id => {
     const selected_element = document.getElementById(id);
-    selected_element.className += " selected";
-    console.log(selected_element.className);
+    selected_element.classList.add("selected");
+    // console.log(selected_element.className);
   };
 
   render() {
