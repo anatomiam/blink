@@ -10,11 +10,21 @@ const four = [];
 const five = [];
 
 class App2 extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount = () => {
+    this.select("FOCUS");
+  };
+
   buildTree = (data, parent) => {
     switch (data.level) {
       case "zero":
         zero.push(
           <div
+            id={data.name}
             className={`${data.name} ${data.level}`}
             data-child1={data.children ? data.children[0].name : ""}
             data-child2={data.children ? data.children[1].name : ""}
@@ -28,6 +38,7 @@ class App2 extends Component {
       case "one":
         one.push(
           <div
+            id={data.name}
             className={`${data.name} ${data.level}`}
             data-child1={data.children ? data.children[0].name : ""}
             data-child2={data.children ? data.children[1].name : ""}
@@ -41,6 +52,7 @@ class App2 extends Component {
       case "two":
         two.push(
           <div
+            id={data.name}
             className={`${data.name} ${data.level}`}
             data-child1={data.children ? data.children[0].name : ""}
             data-child2={data.children ? data.children[1].name : ""}
@@ -54,6 +66,7 @@ class App2 extends Component {
       case "three":
         three.push(
           <div
+            id={data.name}
             className={`${data.name} ${data.level}`}
             data-child1={data.children ? data.children[0].name : ""}
             data-child2={data.children ? data.children[1].name : ""}
@@ -67,6 +80,7 @@ class App2 extends Component {
       case "four":
         four.push(
           <div
+            id={data.name}
             className={`${data.name} ${data.level}`}
             data-child1={data.children ? data.children[0].name : ""}
             data-child2={data.children ? data.children[1].name : ""}
@@ -80,6 +94,7 @@ class App2 extends Component {
       case "five":
         five.push(
           <div
+            id={data.name}
             className={`${data.name} ${data.level}`}
             data-child1={data.children ? data.children[0].name : ""}
             data-child2={data.children ? data.children[1].name : ""}
@@ -97,6 +112,12 @@ class App2 extends Component {
       this.buildTree(data.children[0], data.name);
       this.buildTree(data.children[1], data.name);
     }
+  };
+
+  select = id => {
+    const selected_element = document.getElementById(id);
+    selected_element.className += " selected";
+    console.log(selected_element.className);
   };
 
   render() {

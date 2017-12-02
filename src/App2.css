@@ -28,3 +28,7 @@
     grid-template-columns: repeat(32, 1fr); 
     grid-template-rows: 1fr;
 }
+
+.selected {
+    border: 5px solid steelblue;
+}
