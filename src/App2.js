@@ -17,7 +17,8 @@ class App2 extends Component {
       classes: [],
       childLeft: "",
       childRight: "",
-      parent: ""
+      parent: "",
+      message: ""
     };
   }
   componentWillMount() {
@@ -132,15 +133,11 @@ class App2 extends Component {
       this.moveRight();
     } else if (e.key === "ArrowLeft") {
       this.moveLeft();
+    } else if (e.key === "ArrowDown") {
+      this.restart();
     } else {
       console.log("else");
     }
-  };
-
-  deselect = () => {
-    const selected_element = document.querySelector(".selected");
-    selected_element.classList.remove("selected");
-    // console.log(selected_element.className);
   };
 
   moveLeft = () => {
@@ -159,6 +156,20 @@ class App2 extends Component {
     const newId = this.state.parent;
     this.deselect();
     this.select(newId);
+  };
+
+  restart = () => {
+    this.deselect();
+    this.setState({
+      message: this.state.message + this.state.id
+    });
+    this.select("FOCUS");
+  };
+
+  deselect = () => {
+    const selected_element = document.querySelector(".selected");
+    selected_element.classList.remove("selected");
+    // console.log(selected_element.className);
   };
 
   select = id => {
@@ -185,6 +196,9 @@ class App2 extends Component {
         <div className="three-container">{three}</div>
         <div className="four-container">{four}</div>
         <div className="five-container">{five}</div>
+        <div className="message-container">
+          <div className="message">{this.state.message}</div>
+        </div>
       </div>
     );
   }
@@ -192,16 +206,9 @@ class App2 extends Component {
 
 export default App2;
 
-// TODO add all of selected elements to state, update deselect()
-// add keyboard nav for left and right
-// move down a child using data-attributes
-
 // TODO add listener that determines whether a keypress is a line or dot
 // update keyboard nav
 
-// TODO add a way to select a letter and reset to FOCUS
-//  add a way to display the selected
-// add a way to go up a level
 // add space/ punctuation on FOCUS..?
 
 // TODO REFACTOR
