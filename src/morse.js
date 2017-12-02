@@ -1,6 +1,6 @@
 export const morse = {
   name: "FOCUS",
-  level: "root",
+  level: "zero",
   children: [
     {
       name: "E",
@@ -33,7 +33,7 @@ export const morse = {
                   level: "four",
                   children: [
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     },
                     {
@@ -53,21 +53,21 @@ export const morse = {
                   level: "four",
                   children: [
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     },
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     }
                   ]
                 },
                 {
-                  name: "blank",
+                  name: "ii",
                   level: "four",
                   children: [
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     },
                     {
@@ -93,17 +93,17 @@ export const morse = {
                   level: "four",
                   children: [
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     },
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     }
                   ]
                 },
                 {
-                  name: "blank",
+                  name: "ii",
                   level: "four",
                   children: [
                     {
@@ -111,7 +111,7 @@ export const morse = {
                       level: "five"
                     },
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     }
                   ]
@@ -127,11 +127,11 @@ export const morse = {
                   level: "four",
                   children: [
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     },
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     }
                   ]
@@ -141,7 +141,7 @@ export const morse = {
                   level: "four",
                   children: [
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     },
                     {
@@ -191,7 +191,7 @@ export const morse = {
                       level: "five"
                     },
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     }
                   ]
@@ -207,11 +207,11 @@ export const morse = {
                   level: "four",
                   children: [
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     },
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     }
                   ]
@@ -221,11 +221,11 @@ export const morse = {
                   level: "four",
                   children: [
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     },
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     }
                   ]
@@ -251,7 +251,7 @@ export const morse = {
                       level: "five"
                     },
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     }
                   ]
@@ -261,11 +261,11 @@ export const morse = {
                   level: "four",
                   children: [
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     },
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     }
                   ]
@@ -277,7 +277,7 @@ export const morse = {
               level: "three",
               children: [
                 {
-                  name: "blank",
+                  name: "ii",
                   level: "four",
                   children: [
                     {
@@ -285,13 +285,13 @@ export const morse = {
                       level: "five"
                     },
                     {
-                      name: "blank",
+                      name: "ii",
                       level: "five"
                     }
                   ]
                 },
                 {
-                  name: "blank",
+                  name: "ii",
                   level: "four",
                   children: [
                     {

@@ -1,30 +1,30 @@
-.zero {
+.zero-container {
     display: grid;
-    grid-template-columns: xxx;
-    grid-template-rows: xxx;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
 }
-.one {
+.one-container {
     display: grid;
-    grid-template-columns: xxx;
-    grid-template-rows: xxx;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: 1fr;
 }
-.two {
+.two-container {
     display: grid;
-    grid-template-columns: xxx;
-    grid-template-rows: xxx;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-template-rows: 1fr;
 }
-.three {
+.three-container {
     display: grid;
-    grid-template-columns: xxx;
-    grid-template-rows: xxx;
+    grid-template-columns: repeat(8, 1fr); 
+    grid-template-rows: 1fr;
 }
-.four {
+.four-container {
     display: grid;
-    grid-template-columns: xxx;
-    grid-template-rows: xxx;
+    grid-template-columns: repeat(16, 1fr); 
+    grid-template-rows: 1fr;
 }
-.five {
+.five-container {
     display: grid;
-    grid-template-columns: xxx;
-    grid-template-rows: xxx;
+    grid-template-columns: repeat(32, 1fr); 
+    grid-template-rows: 1fr;
 }
