@@ -12,12 +12,19 @@ const five = [];
 class App2 extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      id: "",
+      classes: [],
+      childLeft: "",
+      childRight: "",
+      parent: ""
+    };
+  }
+  componentWillMount() {
+    this.buildTree(morse, "FOCUS");
   }
 
   componentDidMount = () => {
-    this.select("FOCUS");
-    this.deselect();
     this.select("FOCUS");
   };
 
@@ -25,16 +32,18 @@ class App2 extends Component {
     switch (data.level) {
       case "zero":
         zero.push(
-          <div
+          <button
+            autoFocus
             id={data.name}
             className={`${data.name} ${data.level}`}
-            data-child1={data.children ? data.children[0].name : ""}
-            data-child2={data.children ? data.children[1].name : ""}
+            data-child-left={data.children ? data.children[0].name : ""}
+            data-child-right={data.children ? data.children[1].name : ""}
             data-parent={parent}
+            onKeyDown={this.handleKeyPress}
             key={Math.random()}
           >
             {data.name}
-          </div>
+          </button>
         );
         break;
       case "one":
@@ -42,8 +51,8 @@ class App2 extends Component {
           <div
             id={data.name}
             className={`${data.name} ${data.level}`}
-            data-child1={data.children ? data.children[0].name : ""}
-            data-child2={data.children ? data.children[1].name : ""}
+            data-child-left={data.children ? data.children[0].name : ""}
+            data-child-right={data.children ? data.children[1].name : ""}
             data-parent={parent}
             key={Math.random()}
           >
@@ -56,8 +65,8 @@ class App2 extends Component {
           <div
             id={data.name}
             className={`${data.name} ${data.level}`}
-            data-child1={data.children ? data.children[0].name : ""}
-            data-child2={data.children ? data.children[1].name : ""}
+            data-child-left={data.children ? data.children[0].name : ""}
+            data-child-right={data.children ? data.children[1].name : ""}
             data-parent={parent}
             key={Math.random()}
           >
@@ -70,8 +79,8 @@ class App2 extends Component {
           <div
             id={data.name}
             className={`${data.name} ${data.level}`}
-            data-child1={data.children ? data.children[0].name : ""}
-            data-child2={data.children ? data.children[1].name : ""}
+            data-child-left={data.children ? data.children[0].name : ""}
+            data-child-right={data.children ? data.children[1].name : ""}
             data-parent={parent}
             key={Math.random()}
           >
@@ -84,8 +93,8 @@ class App2 extends Component {
           <div
             id={data.name}
             className={`${data.name} ${data.level}`}
-            data-child1={data.children ? data.children[0].name : ""}
-            data-child2={data.children ? data.children[1].name : ""}
+            data-child-left={data.children ? data.children[0].name : ""}
+            data-child-right={data.children ? data.children[1].name : ""}
             data-parent={parent}
             key={Math.random()}
           >
@@ -98,8 +107,8 @@ class App2 extends Component {
           <div
             id={data.name}
             className={`${data.name} ${data.level}`}
-            data-child1={data.children ? data.children[0].name : ""}
-            data-child2={data.children ? data.children[1].name : ""}
+            data-child-left={data.children ? data.children[0].name : ""}
+            data-child-right={data.children ? data.children[1].name : ""}
             data-parent={parent}
             key={Math.random()}
           >
@@ -116,20 +125,48 @@ class App2 extends Component {
     }
   };
 
+  handleKeyPress = e => {
+    if (e.key === "ArrowDown") {
+      console.log("Down");
+    } else if (e.key === "ArrowRight") {
+      this.moveRight();
+    } else if (e.key === "ArrowLeft") {
+      this.moveLeft();
+    } else {
+      console.log("else");
+    }
+  };
+
   deselect = () => {
     const selected_element = document.querySelector(".selected");
     selected_element.classList.remove("selected");
     // console.log(selected_element.className);
   };
-  
+
+  moveLeft = () => {
+    this.select(this.state.childLeft);
+  };
+
+  moveRight = () => {
+    this.select(this.state.childRight);
+  };
+
   select = id => {
     const selected_element = document.getElementById(id);
-    selected_element.classList.add("selected");
-    // console.log(selected_element.className);
+    if (selected_element !== null) {
+      selected_element.classList.add("selected");
+      const { childLeft, childRight, parent } = selected_element.dataset;
+      this.setState({
+        id: id,
+        classes: selected_element.classList,
+        childLeft: childLeft,
+        childRight: childRight,
+        parent: parent
+      });
+    }
   };
 
   render() {
-    this.buildTree(morse, "FOCUS");
     return (
       <div className="body">
         <div className="zero-container">{zero}</div>
@@ -144,3 +181,17 @@ class App2 extends Component {
 }
 
 export default App2;
+
+// TODO add all of selected elements to state, update deselect()
+// add keyboard nav for left and right
+// move down a child using data-attributes
+
+// TODO add listener that determines whether a keypress is a line or dot
+// update keyboard nav
+
+// TODO add a way to select a letter and reset to FOCUS
+//  add a way to display the selected
+// add a way to go up a level
+// add space/ punctuation on FOCUS..?
+
+// TODO REFACTOR
