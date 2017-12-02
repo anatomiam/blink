@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { morse } from "./morse";
 
-const it = [];
+// const TREE = [];
 class App2 extends Component {
   // buildTree = data => {
   //   return _.map(data, (value, key) => {
@@ -22,17 +22,29 @@ class App2 extends Component {
   //   });
   // };
 
-  buildTree = (data, parent) => {
+  buildTree = (data, parent, TREE = []) => {
     console.log(data, parent);
+      TREE.push(
+        <div
+          className={data.name}
+          data-child1={data.children ? data.children[0].name : ''}
+          data-child2={data.children ? data.children[1].name : ''}
+          data-parent={parent}
+          key={Math.random()}
+        >
+          {data.name}
+        </div>
+      );
     if (data.children) {
-      this.buildTree(data.children[0], data.name);
-      this.buildTree(data.children[1], data.name);
+      this.buildTree(data.children[0], data.name, TREE);
+      this.buildTree(data.children[1], data.name, TREE);
     }
+    return TREE
   };
 
   render() {
-    const x = this.buildTree(morse, "FOCUS");
-    return <div className="body">{x}</div>;
+    // this.buildTree(morse, "FOCUS");
+    return <div className="body">{this.buildTree(morse, "FOCUS")}</div>;
   }
 }
 
