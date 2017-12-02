@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import { morse, alphabet } from './data'
+import { morse, alphabet } from './morse'
 
 
 let interval = 0

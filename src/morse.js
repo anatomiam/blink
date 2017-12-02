@@ -25,7 +25,7 @@ export const morse = {
                   name: "V",
                   children: [
                     {
-                      name: " "
+                      name: "0000000"
                     },
                     {
                       name: "3"
@@ -41,18 +41,18 @@ export const morse = {
                   name: "F",
                   children: [
                     {
-                      name: " "
+                      name: "0000000"
                     },
                     {
-                      name: " "
+                      name: "0000000"
                     }
                   ]
                 },
                 {
-                  name: " ",
+                  name: "0000000",
                   children: [
                     {
-                      name: " "
+                      name: "0000000"
                     },
                     {
                       name: "2"
@@ -73,21 +73,21 @@ export const morse = {
                   name: "L",
                   children: [
                     {
-                      name: " "
+                      name: "0000000"
                     },
                     {
-                      name: " "
+                      name: "0000000"
                     }
                   ]
                 },
                 {
-                  name: " ",
+                  name: "0000000",
                   children: [
                     {
                       name: "+"
                     },
                     {
-                      name: " "
+                      name: "0000000"
                     }
                   ]
                 }
@@ -100,10 +100,10 @@ export const morse = {
                   name: "P",
                   children: [
                     {
-                      name: " "
+                      name: "0000000"
                     },
                     {
-                      name: " "
+                      name: "0000000"
                     }
                   ]
                 },
@@ -111,7 +111,7 @@ export const morse = {
                   name: "J",
                   children: [
                     {
-                      name: " "
+                      name: "0000000"
                     },
                     {
                       name: "1"
@@ -151,7 +151,7 @@ export const morse = {
                       name: "/"
                     },
                     {
-                      name: " "
+                      name: "0000000"
                     }
                   ]
                 }
@@ -164,10 +164,10 @@ export const morse = {
                   name: "C",
                   children: [
                     {
-                      name: " "
+                      name: "0000000"
                     },
                     {
-                      name: " "
+                      name: "0000000"
                     }
                   ]
                 },
@@ -175,10 +175,10 @@ export const morse = {
                   name: "Y",
                   children: [
                     {
-                      name: " "
+                      name: "0000000"
                     },
                     {
-                      name: " "
+                      name: "0000000"
                     }
                   ]
                 }
@@ -199,7 +199,7 @@ export const morse = {
                       name: "7"
                     },
                     {
-                      name: " "
+                      name: "0000000"
                     }
                   ]
                 },
@@ -207,10 +207,10 @@ export const morse = {
                   name: "Q",
                   children: [
                     {
-                      name: " "
+                      name: "0000000"
                     },
                     {
-                      name: " "
+                      name: "0000000"
                     }
                   ]
                 }
@@ -220,18 +220,18 @@ export const morse = {
               name: "O",
               children: [
                 {
-                  name: " ",
+                  name: "0000000",
                   children: [
                     {
                       name: "8"
                     },
                     {
-                      name: " "
+                      name: "0000000"
                     }
                   ]
                 },
                 {
-                  name: " ",
+                  name: "0000000",
                   children: [
                     {
                       name: "9"
@@ -249,6 +249,11 @@ export const morse = {
     }
   ]
 };
+// function one takes an object with a name and 2 children
+// builds div with name and data-attributes for children
+// passes each object in child to function one, as well as the name
+// of the parent function to give the data-attribute for parent
+// initialize with the FOCUS parent name
 
 export const alphabet = [
   "undo",
@@ -279,4 +284,65 @@ export const alphabet = [
   "x",
   "y",
   "z"
+];
+
+export const alphabet2 = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+  "0",
+  "1",
+  "2",
+  "3",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
+  "+",
 ];
