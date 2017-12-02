@@ -6,7 +6,8 @@ body {
 }
 
 div {
-  border: 1px solid rgb(129, 129, 129);
+  /* border: 1px solid rgb(129, 129, 129); */
   padding: 1px;
   margin-bottom: 10px;
+  margin-top: 10px;
 }

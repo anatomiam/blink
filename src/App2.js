@@ -126,8 +126,8 @@ class App2 extends Component {
   };
 
   handleKeyPress = e => {
-    if (e.key === "ArrowDown") {
-      console.log("Down");
+    if (e.key === "ArrowUp") {
+      this.moveUp();
     } else if (e.key === "ArrowRight") {
       this.moveRight();
     } else if (e.key === "ArrowLeft") {
@@ -144,11 +144,21 @@ class App2 extends Component {
   };
 
   moveLeft = () => {
-    this.select(this.state.childLeft);
+    const newId = this.state.childLeft;
+    this.deselect();
+    this.select(newId);
   };
 
   moveRight = () => {
-    this.select(this.state.childRight);
+    const newId = this.state.childRight;
+    this.deselect();
+    this.select(newId);
+  };
+
+  moveUp = () => {
+    const newId = this.state.parent;
+    this.deselect();
+    this.select(newId);
   };
 
   select = id => {
