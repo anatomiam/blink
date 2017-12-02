@@ -1,0 +1,30 @@
+.zero {
+    display: grid;
+    grid-template-columns: xxx;
+    grid-template-rows: xxx;
+}
+.one {
+    display: grid;
+    grid-template-columns: xxx;
+    grid-template-rows: xxx;
+}
+.two {
+    display: grid;
+    grid-template-columns: xxx;
+    grid-template-rows: xxx;
+}
+.three {
+    display: grid;
+    grid-template-columns: xxx;
+    grid-template-rows: xxx;
+}
+.four {
+    display: grid;
+    grid-template-columns: xxx;
+    grid-template-rows: xxx;
+}
+.five {
+    display: grid;
+    grid-template-columns: xxx;
+    grid-template-rows: xxx;
+}
