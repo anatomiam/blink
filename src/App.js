@@ -1,37 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
-import { morse } from './morse'
+import { morse, alphabet } from './data'
 
-const alphabet = [
-  'undo',
-  'space',
-  'a',
-  'b',
-  'c',
-  'd',
-  'e',
-  'f',
-  'g',
-  'h',
-  'i',
-  'j',
-  'k',
-  'l',
-  'm',
-  'n',
-  'o',
-  'p',
-  'q',
-  'r',
-  's',
-  't',
-  'u',
-  'v',
-  'w',
-  'x',
-  'y',
-  'z'
-]
 
 let interval = 0
 
@@ -44,11 +14,11 @@ class App extends Component {
       loop: true,
       counter: 0
     }
-    console.log(morse)
+    // console.log(morse)
   }
 
   componentDidUpdate() {
-    console.log(this.state.sentence.join(''))
+    // console.log(this.state.sentence.join(''))
   }
 
   handleKeyPress = (e) => {
@@ -66,7 +36,7 @@ class App extends Component {
     } else if (e.key === 'q') {
       this.handleStop()
     } else {
-      console.log('else')
+      // console.log('else')
     }
   }
 
@@ -88,11 +58,11 @@ class App extends Component {
       sentence: newSentence, 
       letter: alphabet[0], 
       counter: 0})
-    console.log('added letter')
+    // console.log('added letter')
   }
 
   nextLetter = () => {
-    console.log((this.state.counter + 1) % alphabet.length)
+    // console.log((this.state.counter + 1) % alphabet.length)
     this.setState({
       letter: alphabet[this.state.counter],
       counter: (this.state.counter + 1) % alphabet.length
@@ -100,7 +70,7 @@ class App extends Component {
   }
 
   previousLetter = () => {
-    console.log(this.state.counter)
+    // console.log(this.state.counter)
     this.setState({
       letter: alphabet[this.state.counter - 2],
       counter: (this.state.counter - 1) % alphabet.length
@@ -109,7 +79,7 @@ class App extends Component {
 
   handleStart = () => {
     interval = setInterval(this.nextLetter, 500)
-    console.log('start')
+    // console.log('start')
   }
 
   handleStop = () => {
