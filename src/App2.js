@@ -18,7 +18,12 @@ class App2 extends Component {
       childLeft: "",
       childRight: "",
       parent: "",
-      message: ""
+      message: "",
+      timer: null,
+      seconds: 0,
+      keyDown: false,
+      dot: false,
+      line: false
     };
   }
   componentWillMount() {
@@ -128,40 +133,27 @@ class App2 extends Component {
   };
 
   onKeyDown = e => {
-    if (e.key === "ArrowUp") {
-      console.log("pressed the up key");
-    } else if (e.key === "ArrowRight") {
-      console.log("pressed the right key");
-    } else if (e.key === "ArrowLeft") {
-      console.log("pressed the left key");
-    } else if (e.key === "ArrowDown") {
-      console.log("pressed the down key");
-    } else if (e.key === " ") {
-      console.log("pressed the space key");
-    } else {
-      console.log("else");
+    // on keydown set a timeout for 1 and 4 seconds
+    // keydown state set to true
+    // after first timeout set state dot = true and line = false if keydown still true
+    // after second timeout set state dot = false and line = true if keydown still true
+    // on keyup set keydown state to false check dot and line state and move left or right accordingly
+    if (!this.state.timer) {
+      const timer = setInterval(this.tick, 1000);
+      this.setState({
+        timer: timer,
+        keyDown: true
+      });
     }
   };
+
   onKeyUp = e => {
-    console.log("state = ", this.state.time);
-    if (e.key === "ArrowUp") {
-      console.log("lifted the up key");
-      this.moveUp();
-    } else if (e.key === "ArrowRight") {
-      console.log("lifted the right key");
-      this.moveRight();
-    } else if (e.key === "ArrowLeft") {
-      console.log("lifted the left key");
-      this.moveLeft();
-    } else if (e.key === "ArrowDown") {
-      console.log("lifted the down key");
-      this.restart();
-    } else if (e.key === " ") {
-      console.log("lifted the spacebar key");
-      this.addSpace();
-    } else {
-      console.log("else");
-    }
+    clearInterval(this.state.timer);
+    this.setState({
+      timer: null,
+      keyDown: false,
+      seconds: 0,
+    });
   };
 
   addSpace = e => {
@@ -223,6 +215,12 @@ class App2 extends Component {
     }
   };
 
+  tick = () => {
+    this.setState({
+      seconds: this.state.seconds + 1
+    });
+  };
+
   render() {
     return (
       <div className="body">
@@ -234,6 +232,7 @@ class App2 extends Component {
         <div className="five-container">{five}</div>
         <div className="message-container">
           <div className="message">{this.state.message}</div>
+          <div>{this.state.seconds}</div>
         </div>
       </div>
     );
@@ -245,6 +244,11 @@ export default App2;
 // TODO add listener that determines whether a keypress is a line or dot
 // update keyboard nav
 
-// add space/ punctuation on FOCUS..?
+// add space on FOCUS..?
+
+// add icons on empty slots for various functions i.e. switch keyboards, punctuation, save notes,
+// new notes, browse notes, set timers - general and select actions,
+
+// autocomplete, suggestions, different languages
 
 // TODO REFACTOR
