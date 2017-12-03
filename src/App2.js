@@ -40,7 +40,8 @@ class App2 extends Component {
             data-child-left={data.children ? data.children[0].name : ""}
             data-child-right={data.children ? data.children[1].name : ""}
             data-parent={parent}
-            onKeyDown={this.handleKeyPress}
+            onKeyDown={this.onKeyDown}
+            onKeyUp={this.onKeyUp}
             key={Math.random()}
           >
             {data.name}
@@ -126,7 +127,6 @@ class App2 extends Component {
     }
   };
 
-  handleKeyPress = e => {
   onKeyDown = e => {
     if (e.key === "ArrowUp") {
       console.log("pressed the up key");
@@ -143,7 +143,7 @@ class App2 extends Component {
     }
   };
   onKeyUp = e => {
-    console.log("state = ", this.state.time, )
+    console.log("state = ", this.state.time);
     if (e.key === "ArrowUp") {
       console.log("lifted the up key");
       this.moveUp();
@@ -173,9 +173,6 @@ class App2 extends Component {
   };
 
   moveLeft = () => {
-    const newId = this.state.childLeft;
-    this.deselect();
-    this.select(newId);
     if (this.state.childLeft) {
       const newId = this.state.childLeft;
       this.deselect();
@@ -184,9 +181,6 @@ class App2 extends Component {
   };
 
   moveRight = () => {
-    const newId = this.state.childRight;
-    this.deselect();
-    this.select(newId);
     if (this.state.childRight) {
       const newId = this.state.childRight;
       this.deselect();
