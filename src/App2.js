@@ -8,9 +8,11 @@ const two = [];
 const three = [];
 const four = [];
 const five = [];
-const dot = 1;
-const line = 2;
-const addLetter = 3;
+const space = 5;
+const dot = 100;
+const line = 200;
+const addLetter = 300;
+const timerSpeed = 5;
 
 class App2 extends Component {
   constructor(props) {
@@ -141,20 +143,21 @@ class App2 extends Component {
     // after second timeout set state dot = false and line = true if keydown still true
     // on keyup set keydown state to false check dot and line state and move left or right accordingly
     if (!this.state.timer) {
-      const timer = setInterval(this.count, 1000);
+      const timer = setInterval(this.count, timerSpeed);
       this.setState({
         timer: timer,
-        keyDown: true
       });
     }
   };
 
   onKeyUp = e => {
     this.clearTimer();
+    if (this.state.space) this.addSpace();
     if (this.state.dot) this.moveLeft();
     if (this.state.line) this.moveRight();
     if (this.state.addLetter) this.addLetter();
     this.setState({
+      space: false,
       dot: false,
       line: false,
       addLetter: false
@@ -221,8 +224,17 @@ class App2 extends Component {
 
   setAction = time => {
     switch (time) {
+      case space:
+        this.setState({
+          space: true,
+          dot: false,
+          line: false,
+          addLetter: false
+        });
+        break;
       case dot:
         this.setState({
+          space: false,
           dot: true,
           line: false,
           addLetter: false
@@ -230,6 +242,7 @@ class App2 extends Component {
         break;
       case line:
         this.setState({
+          space: false,
           dot: false,
           line: true,
           addLetter: false
@@ -237,6 +250,7 @@ class App2 extends Component {
         break;
       case addLetter:
         this.setState({
+          space: false,
           dot: false,
           line: false,
           addLetter: true
