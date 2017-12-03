@@ -127,29 +127,71 @@ class App2 extends Component {
   };
 
   handleKeyPress = e => {
+  onKeyDown = e => {
     if (e.key === "ArrowUp") {
-      this.moveUp();
+      console.log("pressed the up key");
     } else if (e.key === "ArrowRight") {
-      this.moveRight();
+      console.log("pressed the right key");
     } else if (e.key === "ArrowLeft") {
-      this.moveLeft();
+      console.log("pressed the left key");
     } else if (e.key === "ArrowDown") {
-      this.restart();
+      console.log("pressed the down key");
+    } else if (e.key === " ") {
+      console.log("pressed the space key");
     } else {
       console.log("else");
     }
+  };
+  onKeyUp = e => {
+    console.log("state = ", this.state.time, )
+    if (e.key === "ArrowUp") {
+      console.log("lifted the up key");
+      this.moveUp();
+    } else if (e.key === "ArrowRight") {
+      console.log("lifted the right key");
+      this.moveRight();
+    } else if (e.key === "ArrowLeft") {
+      console.log("lifted the left key");
+      this.moveLeft();
+    } else if (e.key === "ArrowDown") {
+      console.log("lifted the down key");
+      this.restart();
+    } else if (e.key === " ") {
+      console.log("lifted the spacebar key");
+      this.addSpace();
+    } else {
+      console.log("else");
+    }
+  };
+
+  addSpace = e => {
+    console.log("adding a space");
+
+    this.setState({
+      message: this.state.message + " "
+    });
   };
 
   moveLeft = () => {
     const newId = this.state.childLeft;
     this.deselect();
     this.select(newId);
+    if (this.state.childLeft) {
+      const newId = this.state.childLeft;
+      this.deselect();
+      this.select(newId);
+    }
   };
 
   moveRight = () => {
     const newId = this.state.childRight;
     this.deselect();
     this.select(newId);
+    if (this.state.childRight) {
+      const newId = this.state.childRight;
+      this.deselect();
+      this.select(newId);
+    }
   };
 
   moveUp = () => {
