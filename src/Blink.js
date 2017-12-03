@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { morse } from "./morse";
-import "./App2.css";
+import "./Blink.css";
 
 const zero = [];
 const one = [];
@@ -14,7 +14,7 @@ const line = 200;
 const addLetter = 300;
 const timerSpeed = 5;
 
-class App2 extends Component {
+class Blink extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -137,15 +137,10 @@ class App2 extends Component {
   };
 
   onKeyDown = e => {
-    // on keydown set a timeout for 1 and 4 seconds
-    // keydown state set to true
-    // after first timeout set state dot = true and line = false if keydown still true
-    // after second timeout set state dot = false and line = true if keydown still true
-    // on keyup set keydown state to false check dot and line state and move left or right accordingly
     if (!this.state.timer) {
       const timer = setInterval(this.count, timerSpeed);
       this.setState({
-        timer: timer,
+        timer: timer
       });
     }
   };
@@ -165,7 +160,6 @@ class App2 extends Component {
   };
 
   addSpace = e => {
-    console.log("adding a space");
     this.setState({
       message: this.state.message + " "
     });
@@ -204,7 +198,6 @@ class App2 extends Component {
   deselect = () => {
     const selected_element = document.querySelector(".selected");
     selected_element.classList.remove("selected");
-    // console.log(selected_element.className);
   };
 
   select = id => {
@@ -295,16 +288,4 @@ class App2 extends Component {
   }
 }
 
-export default App2;
-
-// TODO add listener that determines whether a keypress is a line or dot
-// update keyboard nav
-
-// add space on FOCUS..?
-
-// add icons on empty slots for various functions i.e. switch keyboards, punctuation, save notes,
-// new notes, browse notes, set timers - general and select actions,
-
-// autocomplete, suggestions, different languages
-
-// TODO REFACTOR
+export default Blink;
