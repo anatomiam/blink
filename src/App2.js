@@ -8,6 +8,9 @@ const two = [];
 const three = [];
 const four = [];
 const five = [];
+const dot = 1;
+const line = 2;
+const addLetter = 3;
 
 class App2 extends Component {
   constructor(props) {
@@ -21,7 +24,6 @@ class App2 extends Component {
       message: "",
       timer: null,
       seconds: 0,
-      keyDown: false,
       dot: false,
       line: false
     };
@@ -139,7 +141,7 @@ class App2 extends Component {
     // after second timeout set state dot = false and line = true if keydown still true
     // on keyup set keydown state to false check dot and line state and move left or right accordingly
     if (!this.state.timer) {
-      const timer = setInterval(this.tick, 1000);
+      const timer = setInterval(this.count, 1000);
       this.setState({
         timer: timer,
         keyDown: true
@@ -148,17 +150,19 @@ class App2 extends Component {
   };
 
   onKeyUp = e => {
-    clearInterval(this.state.timer);
+    this.clearTimer();
+    if (this.state.dot) this.moveLeft();
+    if (this.state.line) this.moveRight();
+    if (this.state.addLetter) this.addLetter();
     this.setState({
-      timer: null,
-      keyDown: false,
-      seconds: 0,
+      dot: false,
+      line: false,
+      addLetter: false
     });
   };
 
   addSpace = e => {
     console.log("adding a space");
-
     this.setState({
       message: this.state.message + " "
     });
@@ -186,7 +190,7 @@ class App2 extends Component {
     this.select(newId);
   };
 
-  restart = () => {
+  addLetter = () => {
     this.deselect();
     this.setState({
       message: this.state.message + this.state.id
@@ -215,9 +219,47 @@ class App2 extends Component {
     }
   };
 
-  tick = () => {
+  setAction = time => {
+    switch (time) {
+      case dot:
+        this.setState({
+          dot: true,
+          line: false,
+          addLetter: false
+        });
+        break;
+      case line:
+        this.setState({
+          dot: false,
+          line: true,
+          addLetter: false
+        });
+        break;
+      case addLetter:
+        this.setState({
+          dot: false,
+          line: false,
+          addLetter: true
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  count = () => {
+    const currentTime = this.state.seconds + 1;
+    this.setAction(currentTime);
     this.setState({
-      seconds: this.state.seconds + 1
+      seconds: currentTime
+    });
+  };
+
+  clearTimer = () => {
+    clearInterval(this.state.timer);
+    this.setState({
+      timer: null,
+      seconds: 0
     });
   };
 
@@ -231,8 +273,8 @@ class App2 extends Component {
         <div className="four-container">{four}</div>
         <div className="five-container">{five}</div>
         <div className="message-container">
+          <div className="counter">{this.state.seconds}</div>
           <div className="message">{this.state.message}</div>
-          <div>{this.state.seconds}</div>
         </div>
       </div>
     );
