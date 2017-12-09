@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import _ from "lodash";
 import { morse } from "./morse";
 import "./Blink.css";
 
@@ -8,11 +9,37 @@ const two = [];
 const three = [];
 const four = [];
 const five = [];
+const svgHeight = 900;
+const svgWidth = 1200;
+
 const space = 5;
 const dot = 100;
 const line = 200;
 const addLetter = 300;
 const timerSpeed = 5;
+
+// calculate vectors for each level first
+// an array of arrays
+// each item in array is x, y coordinate
+// y = # of (levels) / height / 2 to start, ++ by (levels) / 2 for each level
+// x = (2**level) / width / 2 to start, ++ by (2**level) / 2 for number of nodes
+const levels = _.range(1, 7);
+const yCoor = svgHeight / _.last(levels);
+
+const vex = _.map(levels, level => {
+  const y = yCoor * level;
+  const n = 2 ** level;
+  const nChunck = svgWidth / n;
+  // console.log(nChunck);
+
+  const nRange = _.range(1, n + 1, 2);
+  // console.log(nRange);
+  const toReturn = _.map(nRange, node => {
+    return [node * nChunck, y];
+  });
+  return toReturn
+});
+console.log(vex)
 
 class Blink extends Component {
   constructor(props) {
@@ -30,6 +57,7 @@ class Blink extends Component {
       line: false
     };
   }
+
   componentWillMount() {
     this.buildTree(morse, "FOCUS");
   }
@@ -273,6 +301,7 @@ class Blink extends Component {
   render() {
     return (
       <div className="body">
+        {/* <svg height={svgHeight} width={svgWidth}> */}
         <div className="zero-container">{zero}</div>
         <div className="one-container">{one}</div>
         <div className="two-container">{two}</div>
@@ -283,6 +312,7 @@ class Blink extends Component {
           <div className="counter">{this.state.seconds}</div>
           <div className="message">{this.state.message}</div>
         </div>
+        {/* </svg> */}
       </div>
     );
   }
