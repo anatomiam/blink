@@ -4,6 +4,7 @@ import { morse } from "./morse";
 import "./Blink.css";
 
 const tree = [];
+const heightMargin = 35;
 const svgHeight = 350;
 const svgWidth = 700;
 const radius = 5;
@@ -14,27 +15,25 @@ const line = 200;
 const addLetter = 300;
 const timerSpeed = 5;
 
-const levels = 6;
-let indexers = _.range(0, levels, 0);
-let copyIndexers;
+const numberOfLevels = 6;
+const levelIndexers = _.range(0, numberOfLevels, 0);
 
-const levels_arr = _.range(1, levels + 1);
-const yCoor = svgHeight / _.last(levels_arr);
+const levels = _.range(1, numberOfLevels + 1);
+const yCoordinate = svgHeight / _.last(levels);
 
-const vex = _.map(levels_arr, level => {
-  const y = yCoor * level;
-  const n = 2 ** level;
-  const nChunck = svgWidth / n;
-  // console.log(nChunck);
+const vectors = _.map(levels, level => {
+  const y = yCoordinate * level - heightMargin;
+  const node = 2 ** level;
+  const xSpacer = svgWidth / node;
 
-  const nRange = _.range(1, n + 1, 2);
-  // console.log(nRange);
-  const toReturn = _.map(nRange, node => {
-    return [node * nChunck, y];
+  const nodeRange = _.range(1, node + 1, 2);
+  const toReturn = _.map(nodeRange, node => {
+    return [node * xSpacer, y];
   });
   return toReturn;
 });
-console.log(vex);
+
+console.log(vectors);
 
 class Blink extends Component {
   constructor(props) {
@@ -62,7 +61,6 @@ class Blink extends Component {
   };
 
   buildTree = (data, parent) => {
-    console.log(data.level);
     tree.push(
       <circle
         id={data.name}
@@ -72,14 +70,15 @@ class Blink extends Component {
         data-parent={parent}
         data-level={data.level}
         key={Math.random()}
-        cx={vex[data.level][indexers[data.level]][0]}
-        cy={vex[data.level][indexers[data.level]][1]}
+        cx={vectors[data.level][levelIndexers[data.level]][0]}
+        cy={vectors[data.level][levelIndexers[data.level]][1]}
         r={radius}
+        stroke="steelblue"
+        strokeWidth="1"
+        fill="none"
       />
     );
-    copyIndexers = indexers.slice();
-    copyIndexers[data.level] = copyIndexers[data.level] + 1;
-    indexers = copyIndexers;
+    levelIndexers[data.level] = levelIndexers[data.level] + 1;
     if (data.children) {
       this.buildTree(data.children[0], data.name);
       this.buildTree(data.children[1], data.name);
