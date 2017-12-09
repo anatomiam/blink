@@ -1,44 +1,44 @@
 export const morse = {
   name: "FOCUS",
-  level: "zero",
+  level: 0,
   children: [
     {
       name: "E",
-      level: "one",
+      level: 1,
       children: [
         {
           name: "I",
-          level: "two",
+          level: 2,
           children: [
             {
               name: "S",
-              level: "three",
+              level: 3,
               children: [
                 {
                   name: "H",
-                  level: "four",
+                  level: 4,
                   children: [
                     {
                       name: "_5",
-                      level: "five"
+                      level: 5
                     },
                     {
                       name: "_4",
-                      level: "five"
+                      level: 5
                     }
                   ]
                 },
                 {
                   name: "V",
-                  level: "four",
+                  level: 4,
                   children: [
                     {
                       name: "i",
-                      level: "five"
+                      level: 5
                     },
                     {
                       name: "_3",
-                      level: "five"
+                      level: 5
                     }
                   ]
                 }
@@ -46,33 +46,33 @@ export const morse = {
             },
             {
               name: "U",
-              level: "three",
+              level: 3,
               children: [
                 {
                   name: "F",
-                  level: "four",
+                  level: 4,
                   children: [
                     {
                       name: "i1",
-                      level: "five"
+                      level: 5
                     },
                     {
                       name: "i2",
-                      level: "five"
+                      level: 5
                     }
                   ]
                 },
                 {
                   name: "i3",
-                  level: "four",
+                  level: 4,
                   children: [
                     {
                       name: "i4",
-                      level: "five"
+                      level: 5
                     },
                     {
                       name: "_2",
-                      level: "five"
+                      level: 5
                     }
                   ]
                 }
@@ -82,37 +82,37 @@ export const morse = {
         },
         {
           name: "A",
-          level: "two",
+          level: 2,
           children: [
             {
               name: "R",
-              level: "three",
+              level: 3,
               children: [
                 {
                   name: "L",
-                  level: "four",
+                  level: 4,
                   children: [
                     {
                       name: "i5",
-                      level: "five"
+                      level: 5
                     },
                     {
                       name: "i6",
-                      level: "five"
+                      level: 5
                     }
                   ]
                 },
                 {
                   name: "i7",
-                  level: "four",
+                  level: 4,
                   children: [
                     {
                       name: "_+",
-                      level: "five"
+                      level: 5
                     },
                     {
                       name: "i8",
-                      level: "five"
+                      level: 5
                     }
                   ]
                 }
@@ -120,33 +120,33 @@ export const morse = {
             },
             {
               name: "W",
-              level: "three",
+              level: 3,
               children: [
                 {
                   name: "P",
-                  level: "four",
+                  level: 4,
                   children: [
                     {
                       name: "i9",
-                      level: "five"
+                      level: 5
                     },
                     {
                       name: "i0",
-                      level: "five"
+                      level: 5
                     }
                   ]
                 },
                 {
                   name: "J",
-                  level: "four",
+                  level: 4,
                   children: [
                     {
                       name: "l1",
-                      level: "five"
+                      level: 5
                     },
                     {
                       name: "_1",
-                      level: "five"
+                      level: 5
                     }
                   ]
                 }
@@ -158,41 +158,41 @@ export const morse = {
     },
     {
       name: "T",
-      level: "one",
+      level: 1,
       children: [
         {
           name: "N",
-          level: "two",
+          level: 2,
           children: [
             {
               name: "D",
-              level: "three",
+              level: 3,
               children: [
                 {
                   name: "B",
-                  level: "four",
+                  level: 4,
                   children: [
                     {
                       name: "_6",
-                      level: "five"
+                      level: 5
                     },
                     {
                       name: "_=",
-                      level: "five"
+                      level: 5
                     }
                   ]
                 },
                 {
                   name: "X",
-                  level: "four",
+                  level: 4,
                   children: [
                     {
                       name: "_/",
-                      level: "five"
+                      level: 5
                     },
                     {
                       name: "l2",
-                      level: "five"
+                      level: 5
                     }
                   ]
                 }
@@ -200,33 +200,33 @@ export const morse = {
             },
             {
               name: "K",
-              level: "three",
+              level: 3,
               children: [
                 {
                   name: "C",
-                  level: "four",
+                  level: 4,
                   children: [
                     {
                       name: "l3",
-                      level: "five"
+                      level: 5
                     },
                     {
                       name: "l4",
-                      level: "five"
+                      level: 5
                     }
                   ]
                 },
                 {
                   name: "Y",
-                  level: "four",
+                  level: 4,
                   children: [
                     {
                       name: "l5",
-                      level: "five"
+                      level: 5
                     },
                     {
                       name: "l6",
-                      level: "five"
+                      level: 5
                     }
                   ]
                 }
@@ -236,37 +236,37 @@ export const morse = {
         },
         {
           name: "M",
-          level: "two",
+          level: 2,
           children: [
             {
               name: "G",
-              level: "three",
+              level: 3,
               children: [
                 {
                   name: "Z",
-                  level: "four",
+                  level: 4,
                   children: [
                     {
                       name: "_7",
-                      level: "five"
+                      level: 5
                     },
                     {
                       name: "l7",
-                      level: "five"
+                      level: 5
                     }
                   ]
                 },
                 {
                   name: "Q",
-                  level: "four",
+                  level: 4,
                   children: [
                     {
                       name: "l8",
-                      level: "five"
+                      level: 5
                     },
                     {
                       name: "l9",
-                      level: "five"
+                      level: 5
                     }
                   ]
                 }
@@ -274,33 +274,33 @@ export const morse = {
             },
             {
               name: "O",
-              level: "three",
+              level: 3,
               children: [
                 {
                   name: "il",
-                  level: "four",
+                  level: 4,
                   children: [
                     {
                       name: "_8",
-                      level: "five"
+                      level: 5
                     },
                     {
                       name: "li",
-                      level: "five"
+                      level: 5
                     }
                   ]
                 },
                 {
                   name: "it",
-                  level: "four",
+                  level: 4,
                   children: [
                     {
                       name: "_9",
-                      level: "five"
+                      level: 5
                     },
                     {
                       name: "_0",
-                      level: "five"
+                      level: 5
                     }
                   ]
                 }

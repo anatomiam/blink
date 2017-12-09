@@ -62,127 +62,24 @@ class Blink extends Component {
   };
 
   buildTree = (data, parent) => {
-    console.log(indexers)
-    switch (data.level) {
-      case "zero":
-        tree.push(
-          <circle
-            autoFocus
-            id={data.name}
-            className={`${data.name} ${data.level}`}
-            data-child-left={data.children ? data.children[0].name : ""}
-            data-child-right={data.children ? data.children[1].name : ""}
-            data-parent={parent}
-            onKeyDown={this.onKeyDown}
-            onKeyUp={this.onKeyUp}
-            key={Math.random()}
-            cx={vex[0][indexers[0]][0]}
-            cy={vex[0][indexers[0]][1]}
-            r={radius}
-          />
-        );
-        break;
-      case "one":
-        tree.push(
-          <circle
-            id={data.name}
-            className={`${data.name} ${data.level}`}
-            data-child-left={data.children ? data.children[0].name : ""}
-            data-child-right={data.children ? data.children[1].name : ""}
-            data-parent={parent}
-            key={Math.random()}
-            cx={vex[1][indexers[1]][0]}
-            cy={vex[1][indexers[1]][1]}
-            r={radius}
-          />
-        );
-        copyIndexers = indexers.slice();
-        copyIndexers[1] = copyIndexers[1] + 1;
-        indexers = copyIndexers;
-        break;
-      case "two":
-        tree.push(
-          <circle
-            id={data.name}
-            className={`${data.name} ${data.level}`}
-            data-child-left={data.children ? data.children[0].name : ""}
-            data-child-right={data.children ? data.children[1].name : ""}
-            data-parent={parent}
-            key={Math.random()}
-            cx={vex[2][indexers[2]][0]}
-            cy={vex[2][indexers[2]][1]}
-            r={radius}
-          >
-            {data.name}
-          </circle>
-        );
-        copyIndexers = indexers.slice();
-        copyIndexers[2] = copyIndexers[2] + 1;
-        indexers = copyIndexers;
-        break;
-      case "three":
-        tree.push(
-          <circle
-            id={data.name}
-            className={`${data.name} ${data.level}`}
-            data-child-left={data.children ? data.children[0].name : ""}
-            data-child-right={data.children ? data.children[1].name : ""}
-            data-parent={parent}
-            key={Math.random()}
-            cx={vex[3][indexers[3]][0]}
-            cy={vex[3][indexers[3]][1]}
-            r={radius}
-          >
-            {data.name}
-          </circle>
-        );
-        copyIndexers = indexers.slice();
-        copyIndexers[3] = copyIndexers[3] + 1;
-        indexers = copyIndexers;
-        break;
-      case "four":
-        tree.push(
-          <circle
-            id={data.name}
-            className={`${data.name} ${data.level}`}
-            data-child-left={data.children ? data.children[0].name : ""}
-            data-child-right={data.children ? data.children[1].name : ""}
-            data-parent={parent}
-            key={Math.random()}
-            cx={vex[4][indexers[4]][0]}
-            cy={vex[4][indexers[4]][1]}
-            r={radius}
-          >
-            {data.name}
-          </circle>
-        );
-        copyIndexers = indexers.slice();
-        copyIndexers[4] = copyIndexers[4] + 1;
-        indexers = copyIndexers;
-        break;
-      case "five":
-        tree.push(
-          <circle
-            id={data.name}
-            className={`${data.name} ${data.level}`}
-            data-child-left={data.children ? data.children[0].name : ""}
-            data-child-right={data.children ? data.children[1].name : ""}
-            data-parent={parent}
-            key={Math.random()}
-            cx={vex[5][indexers[5]][0]}
-            cy={vex[5][indexers[5]][1]}
-            r={radius}
-          >
-            {data.name}
-          </circle>
-        );
-        copyIndexers = indexers.slice();
-        copyIndexers[5] = copyIndexers[5] + 1;
-        indexers = copyIndexers;
-        break;
-      default:
-        break;
-    }
+    console.log(data.level);
+    tree.push(
+      <circle
+        id={data.name}
+        className={`${data.name}`}
+        data-child-left={data.children ? data.children[0].name : ""}
+        data-child-right={data.children ? data.children[1].name : ""}
+        data-parent={parent}
+        data-level={data.level}
+        key={Math.random()}
+        cx={vex[data.level][indexers[data.level]][0]}
+        cy={vex[data.level][indexers[data.level]][1]}
+        r={radius}
+      />
+    );
+    copyIndexers = indexers.slice();
+    copyIndexers[data.level] = copyIndexers[data.level] + 1;
+    indexers = copyIndexers;
     if (data.children) {
       this.buildTree(data.children[0], data.name);
       this.buildTree(data.children[1], data.name);
