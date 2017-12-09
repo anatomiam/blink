@@ -3,14 +3,10 @@ import _ from "lodash";
 import { morse } from "./morse";
 import "./Blink.css";
 
-const zero = [];
-const one = [];
-const two = [];
-const three = [];
-const four = [];
-const five = [];
-const svgHeight = 900;
-const svgWidth = 1200;
+const tree = [];
+const svgHeight = 350;
+const svgWidth = 700;
+const radius = 10;
 
 const space = 5;
 const dot = 100;
@@ -18,15 +14,14 @@ const line = 200;
 const addLetter = 300;
 const timerSpeed = 5;
 
-// calculate vectors for each level first
-// an array of arrays
-// each item in array is x, y coordinate
-// y = # of (levels) / height / 2 to start, ++ by (levels) / 2 for each level
-// x = (2**level) / width / 2 to start, ++ by (2**level) / 2 for number of nodes
-const levels = _.range(1, 7);
-const yCoor = svgHeight / _.last(levels);
 
-const vex = _.map(levels, level => {
+const levels = 6;
+let indexers = _.range(0, levels, 0);
+
+const levels_arr = _.range(1, levels + 1);
+const yCoor = svgHeight / _.last(levels_arr);
+
+const vex = _.map(levels_arr, level => {
   const y = yCoor * level;
   const n = 2 ** level;
   const nChunck = svgWidth / n;
@@ -37,9 +32,9 @@ const vex = _.map(levels, level => {
   const toReturn = _.map(nRange, node => {
     return [node * nChunck, y];
   });
-  return toReturn
+  return toReturn;
 });
-console.log(vex)
+console.log(vex);
 
 class Blink extends Component {
   constructor(props) {
@@ -69,7 +64,7 @@ class Blink extends Component {
   buildTree = (data, parent) => {
     switch (data.level) {
       case "zero":
-        zero.push(
+        tree.push(
           <button
             autoFocus
             id={data.name}
@@ -86,21 +81,25 @@ class Blink extends Component {
         );
         break;
       case "one":
-        one.push(
-          <div
+        tree.push(
+          <circle
             id={data.name}
             className={`${data.name} ${data.level}`}
             data-child-left={data.children ? data.children[0].name : ""}
             data-child-right={data.children ? data.children[1].name : ""}
             data-parent={parent}
             key={Math.random()}
-          >
-            {data.name}
-          </div>
+            cx={vex[1][indexers[1]][0]}
+            cy={vex[1][indexers[1]][1]}
+            r={radius}
+          />
         );
+        const copyIndexers = indexers.slice();
+        copyIndexers[1] = copyIndexers[1] + 1;
+        indexers = copyIndexers;
         break;
       case "two":
-        two.push(
+        tree.push(
           <div
             id={data.name}
             className={`${data.name} ${data.level}`}
@@ -114,7 +113,7 @@ class Blink extends Component {
         );
         break;
       case "three":
-        three.push(
+        tree.push(
           <div
             id={data.name}
             className={`${data.name} ${data.level}`}
@@ -128,7 +127,7 @@ class Blink extends Component {
         );
         break;
       case "four":
-        four.push(
+        tree.push(
           <div
             id={data.name}
             className={`${data.name} ${data.level}`}
@@ -142,7 +141,7 @@ class Blink extends Component {
         );
         break;
       case "five":
-        five.push(
+        tree.push(
           <div
             id={data.name}
             className={`${data.name} ${data.level}`}
@@ -301,18 +300,13 @@ class Blink extends Component {
   render() {
     return (
       <div className="body">
-        {/* <svg height={svgHeight} width={svgWidth}> */}
-        <div className="zero-container">{zero}</div>
-        <div className="one-container">{one}</div>
-        <div className="two-container">{two}</div>
-        <div className="three-container">{three}</div>
-        <div className="four-container">{four}</div>
-        <div className="five-container">{five}</div>
+        <svg height={svgHeight} width={svgWidth}>
+          {tree}
+        </svg>
         <div className="message-container">
           <div className="counter">{this.state.seconds}</div>
           <div className="message">{this.state.message}</div>
         </div>
-        {/* </svg> */}
       </div>
     );
   }
