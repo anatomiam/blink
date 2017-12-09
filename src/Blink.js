@@ -6,7 +6,7 @@ import "./Blink.css";
 const tree = [];
 const svgHeight = 350;
 const svgWidth = 700;
-const radius = 10;
+const radius = 5;
 
 const space = 5;
 const dot = 100;
@@ -14,9 +14,9 @@ const line = 200;
 const addLetter = 300;
 const timerSpeed = 5;
 
-
 const levels = 6;
 let indexers = _.range(0, levels, 0);
+let copyIndexers;
 
 const levels_arr = _.range(1, levels + 1);
 const yCoor = svgHeight / _.last(levels_arr);
@@ -62,10 +62,11 @@ class Blink extends Component {
   };
 
   buildTree = (data, parent) => {
+    console.log(indexers)
     switch (data.level) {
       case "zero":
         tree.push(
-          <button
+          <circle
             autoFocus
             id={data.name}
             className={`${data.name} ${data.level}`}
@@ -75,9 +76,10 @@ class Blink extends Component {
             onKeyDown={this.onKeyDown}
             onKeyUp={this.onKeyUp}
             key={Math.random()}
-          >
-            {data.name}
-          </button>
+            cx={vex[0][indexers[0]][0]}
+            cy={vex[0][indexers[0]][1]}
+            r={radius}
+          />
         );
         break;
       case "one":
@@ -94,65 +96,89 @@ class Blink extends Component {
             r={radius}
           />
         );
-        const copyIndexers = indexers.slice();
+        copyIndexers = indexers.slice();
         copyIndexers[1] = copyIndexers[1] + 1;
         indexers = copyIndexers;
         break;
       case "two":
         tree.push(
-          <div
+          <circle
             id={data.name}
             className={`${data.name} ${data.level}`}
             data-child-left={data.children ? data.children[0].name : ""}
             data-child-right={data.children ? data.children[1].name : ""}
             data-parent={parent}
             key={Math.random()}
+            cx={vex[2][indexers[2]][0]}
+            cy={vex[2][indexers[2]][1]}
+            r={radius}
           >
             {data.name}
-          </div>
+          </circle>
         );
+        copyIndexers = indexers.slice();
+        copyIndexers[2] = copyIndexers[2] + 1;
+        indexers = copyIndexers;
         break;
       case "three":
         tree.push(
-          <div
+          <circle
             id={data.name}
             className={`${data.name} ${data.level}`}
             data-child-left={data.children ? data.children[0].name : ""}
             data-child-right={data.children ? data.children[1].name : ""}
             data-parent={parent}
             key={Math.random()}
+            cx={vex[3][indexers[3]][0]}
+            cy={vex[3][indexers[3]][1]}
+            r={radius}
           >
             {data.name}
-          </div>
+          </circle>
         );
+        copyIndexers = indexers.slice();
+        copyIndexers[3] = copyIndexers[3] + 1;
+        indexers = copyIndexers;
         break;
       case "four":
         tree.push(
-          <div
+          <circle
             id={data.name}
             className={`${data.name} ${data.level}`}
             data-child-left={data.children ? data.children[0].name : ""}
             data-child-right={data.children ? data.children[1].name : ""}
             data-parent={parent}
             key={Math.random()}
+            cx={vex[4][indexers[4]][0]}
+            cy={vex[4][indexers[4]][1]}
+            r={radius}
           >
             {data.name}
-          </div>
+          </circle>
         );
+        copyIndexers = indexers.slice();
+        copyIndexers[4] = copyIndexers[4] + 1;
+        indexers = copyIndexers;
         break;
       case "five":
         tree.push(
-          <div
+          <circle
             id={data.name}
             className={`${data.name} ${data.level}`}
             data-child-left={data.children ? data.children[0].name : ""}
             data-child-right={data.children ? data.children[1].name : ""}
             data-parent={parent}
             key={Math.random()}
+            cx={vex[5][indexers[5]][0]}
+            cy={vex[5][indexers[5]][1]}
+            r={radius}
           >
             {data.name}
-          </div>
+          </circle>
         );
+        copyIndexers = indexers.slice();
+        copyIndexers[5] = copyIndexers[5] + 1;
+        indexers = copyIndexers;
         break;
       default:
         break;
