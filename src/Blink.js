@@ -3,11 +3,12 @@ import _ from "lodash";
 import { morse } from "./morse";
 import "./Blink.css";
 
-const tree = [];
+const buttons = [];
+const circles = [];
 const heightMargin = 35;
 const svgHeight = 350;
 const svgWidth = 700;
-const radius = 5;
+const radius = 10;
 
 const space = 5;
 const dot = 100;
@@ -16,7 +17,7 @@ const addLetter = 300;
 const timerSpeed = 5;
 
 const numberOfLevels = 6;
-const levelIndexers = _.range(0, numberOfLevels, 0);
+const levelIndexers = _.range(0, numberOfLevels, 0); // mutates
 
 const levels = _.range(1, numberOfLevels + 1);
 const yCoordinate = svgHeight / _.last(levels);
@@ -25,12 +26,11 @@ const vectors = _.map(levels, level => {
   const y = yCoordinate * level - heightMargin;
   const node = 2 ** level;
   const xSpacer = svgWidth / node;
-
   const nodeRange = _.range(1, node + 1, 2);
-  const toReturn = _.map(nodeRange, node => {
+
+  return _.map(nodeRange, node => {
     return [node * xSpacer, y];
   });
-  return toReturn;
 });
 
 console.log(vectors);
@@ -53,35 +53,51 @@ class Blink extends Component {
   }
 
   componentWillMount() {
-    this.buildTree(morse, "FOCUS");
+    this.buildCircles(morse, "FOCUS");
   }
 
   componentDidMount = () => {
-    this.select("FOCUS");
+    window.addEventListener("keydown", this.onKeyDown);
+    window.addEventListener("keyup", this.onKeyUp);
+    // this.select("FOCUS");
   };
 
-  buildTree = (data, parent) => {
-    tree.push(
-      <circle
-        id={data.name}
-        className={`${data.name}`}
-        data-child-left={data.children ? data.children[0].name : ""}
-        data-child-right={data.children ? data.children[1].name : ""}
-        data-parent={parent}
-        data-level={data.level}
-        key={Math.random()}
-        cx={vectors[data.level][levelIndexers[data.level]][0]}
-        cy={vectors[data.level][levelIndexers[data.level]][1]}
-        r={radius}
-        stroke="steelblue"
-        strokeWidth="1"
-        fill="none"
-      />
+  componentWillUnmount() {
+    window.removeEventListener("keydown", this.onKeyDown);
+    window.removeEventListener("keyup", this.onKeyUp);
+  }
+
+  buildCircles = (data, parent) => {
+    circles.push(
+      <g key={Math.random()}>
+        <circle
+          id={data.name}
+          className={`${data.name}`}
+          data-child-left={data.children ? data.children[0].name : ""}
+          data-child-right={data.children ? data.children[1].name : ""}
+          data-parent={parent}
+          data-level={data.level}
+          cx={vectors[data.level][levelIndexers[data.level]][0]}
+          cy={vectors[data.level][levelIndexers[data.level]][1]}
+          r={radius}
+          stroke="steelblue"
+          strokeWidth="1"
+          fill="none"
+        />
+        <text
+          x={vectors[data.level][levelIndexers[data.level]][0]}
+          y={vectors[data.level][levelIndexers[data.level]][1]}
+          textAnchor='middle' 
+          alignmentBaseline="central"
+        >
+          {data.name}
+        </text>
+      </g>
     );
     levelIndexers[data.level] = levelIndexers[data.level] + 1;
     if (data.children) {
-      this.buildTree(data.children[0], data.name);
-      this.buildTree(data.children[1], data.name);
+      this.buildCircles(data.children[0], data.name);
+      this.buildCircles(data.children[1], data.name);
     }
   };
 
@@ -151,8 +167,9 @@ class Blink extends Component {
 
   select = id => {
     const selected_element = document.getElementById(id);
+    console.log(selected_element);
     if (selected_element !== null) {
-      selected_element.classList.add("selected");
+      // selected_element.classList.add("selected");
       const { childLeft, childRight, parent } = selected_element.dataset;
       this.setState({
         id: id,
@@ -222,8 +239,9 @@ class Blink extends Component {
   render() {
     return (
       <div className="body">
+        {buttons}
         <svg height={svgHeight} width={svgWidth}>
-          {tree}
+          {circles}
         </svg>
         <div className="message-container">
           <div className="counter">{this.state.seconds}</div>
