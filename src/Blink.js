@@ -3,21 +3,22 @@ import _ from "lodash";
 import { morse } from "./morse";
 import "./Blink.css";
 
-const buttons = [];
-const circles = [];
+
+// const buttons = [];
+let circles = [];
 const heightMargin = 35;
 const svgHeight = 350;
 const svgWidth = 700;
 const radius = 10;
 
 const space = 5;
-const dot = 100;
-const line = 200;
-const addLetter = 300;
+const dot = 50;
+const line = 100;
+const addLetter = 150;
 const timerSpeed = 5;
 
 const numberOfLevels = 6;
-const levelIndexers = _.range(0, numberOfLevels, 0); // mutates
+let levelIndexers = _.range(0, numberOfLevels, 0); // mutates
 
 const levels = _.range(1, numberOfLevels + 1);
 const yCoordinate = svgHeight / _.last(levels);
@@ -39,35 +40,50 @@ class Blink extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: "",
+      id: "rootNode",
       classes: [],
-      childLeft: "",
-      childRight: "",
-      parent: "",
+      childLeft: "E",
+      childRight: "T",
+      parent: "rootNode",
       message: "",
       timer: null,
       seconds: 0,
       dot: false,
       line: false
     };
+    this.buildCircles(morse, this.state.parent, this.state.id);
   }
 
   componentWillMount() {
-    this.buildCircles(morse, "FOCUS");
+    console.log(`this state id = ${this.state.id}`)
   }
 
   componentDidMount = () => {
     window.addEventListener("keydown", this.onKeyDown);
     window.addEventListener("keyup", this.onKeyUp);
-    // this.select("FOCUS");
+    // this.select("rootNode");
   };
+
+  // shouldComponentUpdate = (nextProps, nextState) => {
+  // console.log('nextshould', this.state, nextState)
+  // return this.state.id !== nextState.id ? true : false
+
+  // }
+
+  componentWillUpdate = (nextProps, nextState) => {
+    console.log("next", nextState.parent, "current", this.state.parent)
+    if (this.state.id !== nextState.id && !(this.state.id === "rootNode" && nextState.id === "rootNode")) {
+      this.buildCircles(morse, this.state.id, nextState.id)
+    }
+  }
 
   componentWillUnmount() {
     window.removeEventListener("keydown", this.onKeyDown);
     window.removeEventListener("keyup", this.onKeyUp);
   }
 
-  buildCircles = (data, parent) => {
+  buildCircles = (data, parent, id) => {
+    console.log("level", data.level)
     circles.push(
       <g key={Math.random()}>
         <circle
@@ -80,14 +96,14 @@ class Blink extends Component {
           cx={vectors[data.level][levelIndexers[data.level]][0]}
           cy={vectors[data.level][levelIndexers[data.level]][1]}
           r={radius}
-          stroke="steelblue"
+          stroke={id === data.name ? "red" : "steelblue"}
           strokeWidth="1"
           fill="none"
         />
         <text
           x={vectors[data.level][levelIndexers[data.level]][0]}
           y={vectors[data.level][levelIndexers[data.level]][1]}
-          textAnchor='middle' 
+          textAnchor='middle'
           alignmentBaseline="central"
         >
           {data.name}
@@ -96,8 +112,8 @@ class Blink extends Component {
     );
     levelIndexers[data.level] = levelIndexers[data.level] + 1;
     if (data.children) {
-      this.buildCircles(data.children[0], data.name);
-      this.buildCircles(data.children[1], data.name);
+      this.buildCircles(data.children[0], data.name, id);
+      this.buildCircles(data.children[1], data.name, id);
     }
   };
 
@@ -133,7 +149,6 @@ class Blink extends Component {
   moveLeft = () => {
     if (this.state.childLeft) {
       const newId = this.state.childLeft;
-      this.deselect();
       this.select(newId);
     }
   };
@@ -141,36 +156,30 @@ class Blink extends Component {
   moveRight = () => {
     if (this.state.childRight) {
       const newId = this.state.childRight;
-      this.deselect();
       this.select(newId);
     }
   };
 
   moveUp = () => {
     const newId = this.state.parent;
-    this.deselect();
     this.select(newId);
   };
 
   addLetter = () => {
-    this.deselect();
     this.setState({
       message: this.state.message + this.state.id
     });
-    this.select("FOCUS");
-  };
-
-  deselect = () => {
-    const selected_element = document.querySelector(".selected");
-    selected_element.classList.remove("selected");
+    this.select("rootNode");
   };
 
   select = id => {
     const selected_element = document.getElementById(id);
-    console.log(selected_element);
+    console.log('id=', id, 'element=', selected_element);
     if (selected_element !== null) {
       // selected_element.classList.add("selected");
       const { childLeft, childRight, parent } = selected_element.dataset;
+      levelIndexers = _.range(0, numberOfLevels, 0); // mutates
+      circles = []
       this.setState({
         id: id,
         classes: selected_element.classList,
@@ -239,7 +248,7 @@ class Blink extends Component {
   render() {
     return (
       <div className="body">
-        {buttons}
+        {/* {buttons} */}
         <svg height={svgHeight} width={svgWidth}>
           {circles}
         </svg>
@@ -253,3 +262,9 @@ class Blink extends Component {
 }
 
 export default Blink;
+
+// on load render the tree with rootNode as selection
+// keydown start timer
+// less than one is space, one second is left, two is right, three is append to text, etc
+// if one, re render tree with the left child as as the selection
+

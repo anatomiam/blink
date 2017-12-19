@@ -1,5 +1,5 @@
 export const morse = {
-  name: "FOCUS",
+  name: "rootNode",
   level: 0,
   children: [
     {
