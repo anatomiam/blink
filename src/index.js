@@ -1,8 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import Blink from './Blink';
-import registerServiceWorker from './registerServiceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import registerServiceWorker from "./registerServiceWorker";
+import ReBlink from "./reBlink";
+import { Provider } from "react-redux";
+import store from "./store";
 
-ReactDOM.render(<Blink />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <ReBlink />
+  </Provider>,
+  document.getElementById("root")
+);
 registerServiceWorker();
