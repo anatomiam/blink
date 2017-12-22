@@ -1,9 +1,10 @@
-export function buildCircles() {
-    return {
-      type: "BUILD_CIRCLES",
-      payload: {
-        circles: "I am the second circle",
-      }
+export function buildCircle(data, parent, selected) {
+  return {
+    type: "BUILD_CIRCLE",
+    payload: {
+      data,
+      parent,
+      selected
     }
-  }
-  
+  };
+}
