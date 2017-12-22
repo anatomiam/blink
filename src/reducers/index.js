@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import build from "./buildReducer";
+import build from "./circleReducer";
 // import key from "./keyReducer";
 // import message from "./messageReducer";
 // import step from "./stepReducer";

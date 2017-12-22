@@ -13,7 +13,6 @@ export const SVG_WIDTH = 700;
 export const RADIUS = 10;
 
 export const NUMBER_OF_LEVELS = 6; // TODO parse # of levels from tree itself
-export const LEVEL_INDEXERS = _.range(0, NUMBER_OF_LEVELS, 0);
 export const LEVELS = _.range(1, NUMBER_OF_LEVELS + 1);
 
 // grabs the height of each level (row) of svg

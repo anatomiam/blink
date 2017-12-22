@@ -2,45 +2,34 @@ import _ from "lodash";
 import React from "react";
 import Circle from "../components/circleComponent";
 import { connect } from "react-redux";
+import { SVG_HEIGHT, SVG_WIDTH } from "../data/constants";
+import generateTree from "../data/generateTree";
 
-import { buildCircle } from "../actions/buildActions";
+import { setTree } from "../actions/circleActions";
 import morse from "../data/morse";
-// TODO import the morse data to pass to build action
 
 const mapStateToProps = state => {
   return {
-    circles: state.build.circles,
-    nextCircles: state.build.nextCircles
+    circles: state.build.tree
   };
 };
 
 class CircleContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    // todo while there are children, update children and pass them into buildCircl
-    console.log('before', this.props.nextCircles)
-    this.props.dispatch(buildCircle(morse, morse.name, morse.name));
-    console.log('after', this.props.nextCircles)
+  componentWillMount() {
+    let circleData = generateTree(morse, morse.name, morse.name);
+    this.props.dispatch(setTree(circleData));
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    // console.log("after", this.props, nextProps);
-    if (
-      nextProps.nextCircles.id !== this.props.nextCircles.id &&
-      !(this.props.nextCircles.id === "rootNode" && nextProps.nextCircles.id === "rootNode")
-    ) {
-      this.props.dispatch(buildCircle(nextProps.nextCircles.data, this.props.nextCircles.parent, nextProps.nextCircles.data.name));
-    }
-  }
+  componentWillUpdate(nextProps) {}
 
   render() {
-    // console.log(this.props);
-    const { circles } = this.props;
     return (
       <React.Fragment>
-        {_.map(circles, circle => (
-          <Circle key={Math.random()} circles={circle} />
-        ))}
+        <svg height={SVG_HEIGHT} width={SVG_WIDTH}>
+          {_.map(this.props.circles, circle => (
+            <Circle key={Math.random()} circle={circle} />
+          ))}
+        </svg>
       </React.Fragment>
     );
   }
