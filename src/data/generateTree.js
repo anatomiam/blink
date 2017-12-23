@@ -6,7 +6,6 @@ let levelIndexer = _.range(0, NUMBER_OF_LEVELS, 0);
 
 // generateTree has side effects for both tree and levelIndexer
 const generateTree = (data, parent, selected) => {
-  //   console.log(data, parent, selected);
   tree = [
     ...tree,
     {
