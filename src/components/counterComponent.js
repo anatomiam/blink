@@ -9,7 +9,7 @@ export default class Counter extends React.Component {
         return (
             <React.Fragment>
                 <div>
-                    Counter
+                    {this.props.seconds}
                 </div>
             </React.Fragment>
         )

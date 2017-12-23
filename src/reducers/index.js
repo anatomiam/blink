@@ -1,10 +1,11 @@
 import { combineReducers } from "redux";
 
-import build from "./circleReducer";
-// import key from "./keyReducer";
+import circle from "./circleReducer";
+import counter from "./counterReducer";
 // import message from "./messageReducer";
 // import step from "./stepReducer";
 
 export default combineReducers({
-  build,
+  circle,
+  counter
 });

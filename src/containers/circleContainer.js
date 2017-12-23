@@ -10,7 +10,7 @@ import morse from "../data/morse";
 
 const mapStateToProps = state => {
   return {
-    circles: state.build.tree
+    circles: state.circle.tree
   };
 };
 
