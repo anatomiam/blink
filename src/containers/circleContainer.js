@@ -10,14 +10,17 @@ import morse from "../data/morse";
 
 const mapStateToProps = state => {
   return {
-    circles: state.circle.tree
+    circles: state.circle.tree,
+    circleId: state.circle.circleId,
+    parentId: state.circle.parentId
   };
 };
 
 class CircleContainer extends React.Component {
   componentWillMount() {
-    let circleData = generateTree(morse, morse.name, morse.name);
-    this.props.dispatch(setTree(circleData));
+    const { dispatch, circleId, parentId } = this.props;
+    let circleData = generateTree(morse, circleId, parentId);
+    dispatch(setTree(circleData));
   }
 
   componentWillUpdate(nextProps) {}

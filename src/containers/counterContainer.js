@@ -26,8 +26,8 @@ class CounterContainer extends React.Component {
     window.addEventListener("keyup", () => {
       if (this.props.counterId) {
         clearInterval(this.props.counterId);
-        this.props.dispatch(stopCounter());
         this.props.dispatch(resetAction());
+        this.props.dispatch(stopCounter());
       }
     });
   }

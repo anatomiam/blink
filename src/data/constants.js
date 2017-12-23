@@ -1,5 +1,5 @@
-import _ from 'lodash'
-// Speed settings
+import _ from "lodash";
+// timer settings
 export const SPACE = 5;
 export const DOT = 50;
 export const LINE = 100;
@@ -11,6 +11,8 @@ export const HEIGHT_MARGIN = 35;
 export const SVG_HEIGHT = 350;
 export const SVG_WIDTH = 700;
 export const RADIUS = 10;
+
+export const ROOT_NODE = "rootNode";
 
 export const NUMBER_OF_LEVELS = 6; // TODO parse # of levels from tree itself
 export const LEVELS = _.range(1, NUMBER_OF_LEVELS + 1);
