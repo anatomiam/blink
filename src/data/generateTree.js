@@ -5,7 +5,12 @@ let tree = [];
 let levelIndexer = _.range(0, NUMBER_OF_LEVELS, 0);
 
 // generateTree has side effects for both tree and levelIndexer
-const generateTree = (data, parent, selected) => {
+const generateTree = (data, parent, selected, reset = false) => {
+  if (reset) {
+    levelIndexer = _.range(0, NUMBER_OF_LEVELS, 0);
+    tree = []
+  }
+  console.log("stroke = ", selected, data.name);
   tree = [
     ...tree,
     {

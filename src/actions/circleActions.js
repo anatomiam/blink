@@ -6,13 +6,3 @@ export function setTree(tree) {
     }
   };
 }
-
-export function selectCircle(circleId, parentId) {
-  return {
-    type: "SELECT_CIRCLE",
-    payload: {
-      circleId,
-      parentId
-    }
-  };
-}

@@ -9,6 +9,15 @@ export function setAction(seconds) {
 
 export function resetAction() {
   return {
-    type: "RESET_ACTION",
+    type: "RESET_ACTION"
+  };
+}
+
+export function selectCircle(circleId) {
+  return {
+    type: "SELECT_CIRCLE",
+    payload: {
+      circleId
+    }
   };
 }
