@@ -24,7 +24,6 @@ class CircleContainer extends React.Component {
   }
 
   componentWillUpdate(nextProps) {
-    console.log("this props is ", this.props, "next up is ", nextProps);
     if (this.props.circleId !== nextProps.circleId) {
       const { dispatch, circleId, parentId } = nextProps;
       const circleData = generateTree(morse, parentId, circleId, true);
@@ -34,13 +33,11 @@ class CircleContainer extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <svg height={SVG_HEIGHT} width={SVG_WIDTH}>
-          {_.map(this.props.circles, circle => (
-            <Circle key={Math.random()} circle={circle} />
-          ))}
-        </svg>
-      </React.Fragment>
+      <svg height={SVG_HEIGHT} width={SVG_WIDTH}>
+        {_.map(this.props.circles, circle => (
+          <Circle key={Math.random()} circle={circle} />
+        ))}
+      </svg>
     );
   }
 }

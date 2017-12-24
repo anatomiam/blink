@@ -1,17 +1,7 @@
-import React from 'react'
-
-// const styles = {
-
-// }
+import React from "react";
 
 export default class Counter extends React.Component {
-    render() {
-        return (
-            <React.Fragment>
-                <div>
-                    {this.props.seconds}
-                </div>
-            </React.Fragment>
-        )
-    }
+  render() {
+    return <div>{this.props.seconds}</div>;
+  }
 }

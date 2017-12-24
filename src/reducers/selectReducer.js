@@ -17,7 +17,6 @@ export default function reducer(
     case "SELECT_CIRCLE": {
       const { circleId } = action.payload;
       const selected_element = document.getElementById(circleId);
-      console.log("selected", selected_element);
       if (selected_element !== null) {
         const { childLeft, childRight, parent } = selected_element.dataset;
         return {
@@ -29,7 +28,6 @@ export default function reducer(
         };
       } else {
         const root_element = document.getElementById(ROOT_NODE);
-        console.log("root", root_element);
         const { childLeft, childRight, parent } = root_element.dataset;
         return {
           ...state,
