@@ -1,23 +1,12 @@
 export default function reducer(
   state = {
-    user: {},
-    fetching: false,
-    error: null
+    message: ""
   },
   action
 ) {
   switch (action.type) {
-    case "FETCH_USER": {
-      return { ...state, fetching: true };
-    }
-    case "FETCH_USER_REJECTED": {
-      return { ...state, fetching: false, error: action.payload };
-    }
-    case "SET_USER_AGE": {
-      return {
-        ...state,
-        user: { ...state.user, age: action.payload }
-      };
+    case "ADD_TO_MESSAGE": {
+      return { ...state, message: state.message.concat(action.payload.letter) };
     }
     default:
       break;

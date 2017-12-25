@@ -1,7 +1,7 @@
 import React from "react";
 import CircleContainer from "./containers/circleContainer";
 import CounterContainer from "./containers/counterContainer";
-import Message from "./components/messageComponent";
+import MessageContainer from "./containers/messageContainer";
 
 export default class Blink extends React.Component {
   render() {
@@ -9,7 +9,7 @@ export default class Blink extends React.Component {
       <React.Fragment>
         <CounterContainer />
         <CircleContainer />
-        <Message />
+        <MessageContainer />
       </React.Fragment>
     );
   }

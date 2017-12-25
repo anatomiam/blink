@@ -2,6 +2,7 @@ import React from "react";
 
 export default class Message extends React.Component {
   render() {
-    return <div>Message</div>;
+    const { message } = this.props;
+    return <React.Fragment>{message}</React.Fragment>;
   }
 }

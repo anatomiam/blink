@@ -2,6 +2,7 @@ import React from "react";
 import Counter from "../components/counterComponent";
 import { connect } from "react-redux";
 import { setCounterId, stopCounter, count } from "../actions/counterActions";
+import { addToMessage } from "../actions/messageActions";
 import { setAction, resetAction, selectCircle } from "../actions/selectActions";
 import { TIMER_SPEED } from "../data/constants";
 
@@ -34,10 +35,10 @@ class CounterContainer extends React.Component {
     window.addEventListener("keyup", () => {
       if (this.props.counterId) {
         clearInterval(this.props.counterId);
-        // TODO
         if (this.props.space) {
-          // add space to message
-          // reset
+          // add space to message, reset
+          this.props.dispatch(addToMessage(" "));
+          this.props.dispatch(selectCircle());
         } else if (this.props.dot) {
           // moves left
           this.props.dispatch(selectCircle(this.props.childLeftId));
@@ -45,8 +46,9 @@ class CounterContainer extends React.Component {
           // moves right
           this.props.dispatch(selectCircle(this.props.childRightId));
         } else if (this.props.addLetter) {
-          //  add selected letter to message
-          // reset
+          //  add selected letter to message, reset
+          this.props.dispatch(addToMessage(this.props.circleId));
+          this.props.dispatch(selectCircle());
         }
         this.props.dispatch(resetAction());
         this.props.dispatch(stopCounter());

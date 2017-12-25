@@ -2,7 +2,7 @@ import _ from "lodash";
 import React from "react";
 import Circle from "../components/circleComponent";
 import { connect } from "react-redux";
-import { ROOT_NODE, SVG_HEIGHT, SVG_WIDTH } from "../data/constants";
+import { SVG_HEIGHT, SVG_WIDTH } from "../data/constants";
 import generateTree from "../data/generateTree";
 
 import { setTree } from "../actions/circleActions";
