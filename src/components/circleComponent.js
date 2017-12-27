@@ -30,7 +30,13 @@ export default class Circle extends React.Component {
           strokeWidth="1"
           fill="none"
         />
-        <text x={cx} y={cy} textAnchor="middle" alignmentBaseline="central">
+        <text 
+          x={cx} 
+          y={cy} 
+          textAnchor="middle" 
+          alignmentBaseline="central"
+          fontFamily="Raleway"
+        >
           {name}
         </text>
       </g>

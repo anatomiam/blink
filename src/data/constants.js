@@ -8,9 +8,9 @@ export const TIMER_SPEED = 5;
 
 // SVG circle tree building
 export const HEIGHT_MARGIN = 35;
-export const SVG_HEIGHT = 350;
-export const SVG_WIDTH = 700;
-export const RADIUS = 10;
+export const SVG_HEIGHT = 400;
+export const SVG_WIDTH = 1200;
+export const RADIUS = 17;
 
 export const ROOT_NODE = "rootNode";
 
