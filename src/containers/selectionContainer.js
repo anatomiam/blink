@@ -1,27 +1,27 @@
 import React from "react";
-import Counter from "../components/counterComponent";
+import Selection from "../components/selectionComponent";
 import { connect } from "react-redux";
 import { setCounterId, stopCounter, count } from "../actions/counterActions";
 import { addToMessage } from "../actions/messageActions";
-import { setAction, resetAction, selectCircle } from "../actions/selectActions";
+import { setAction, resetAction, selectCircle } from "../actions/selectionActions";
 import { TIMER_SPEED } from "../data/constants";
 
 const mapStateToProps = state => {
   return {
     counterId: state.counter.counterId,
     seconds: state.counter.seconds,
-    space: state.select.space,
-    dot: state.select.dot,
-    line: state.select.line,
-    addLetter: state.select.addLetter,
-    circleId: state.select.circleId,
-    parentId: state.select.parentId,
-    childLeftId: state.select.childLeftId,
-    childRightId: state.select.childRightId
+    space: state.selection.space,
+    dot: state.selection.dot,
+    line: state.selection.line,
+    addLetter: state.selection.addLetter,
+    circleId: state.selection.circleId,
+    parentId: state.selection.parentId,
+    childLeftId: state.selection.childLeftId,
+    childRightId: state.selection.childRightId
   };
 };
 
-class CounterContainer extends React.Component {
+class SelectionContainer extends React.Component {
   componentDidMount() {
     window.addEventListener("keydown", () => {
       if (!this.props.counterId) {
@@ -56,8 +56,8 @@ class CounterContainer extends React.Component {
     });
   }
   render() {
-    return <Counter seconds={this.props.seconds} />;
+    return <Selection seconds={this.props.seconds} />;
   }
 }
 
-export default connect(mapStateToProps)(CounterContainer);
+export default connect(mapStateToProps)(SelectionContainer);

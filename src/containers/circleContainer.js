@@ -11,8 +11,8 @@ import morse from "../data/morse";
 const mapStateToProps = state => {
   return {
     circles: state.circle.tree,
-    circleId: state.select.circleId,
-    parentId: state.select.parentId
+    circleId: state.selection.circleId,
+    parentId: state.selection.parentId
   };
 };
 
