@@ -26,6 +26,7 @@ class SelectionContainer extends React.Component {
     window.addEventListener("keydown", () => {
       if (!this.props.counterId) {
         const counterId = setInterval(() => {
+          // may need to refactor setAction and pull the switch statement into container so that we can dispatch multiple actions instead of the one
           this.props.dispatch(setAction(this.props.seconds));
           this.props.dispatch(count());
         }, TIMER_SPEED);
