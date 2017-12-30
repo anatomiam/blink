@@ -10,6 +10,7 @@ import {
   setSpace,
   addLetter
 } from "../actions/selectionActions";
+import { playNote } from "../actions/soundAction";
 import { SPACE, DOT, LINE, ADD_LETTER, TIMER_SPEED } from "../data/constants";
 
 const mapStateToProps = state => {
@@ -27,33 +28,35 @@ const mapStateToProps = state => {
   };
 };
 
+const context = new (window.AudioContext || window.webkitAudioContext)();
+
 class SelectionContainer extends React.Component {
   componentDidMount() {
     window.addEventListener("keydown", () => {
       if (!this.props.counterId) {
         const counterId = setInterval(() => {
           // may need to refactor setAction and pull the switch statement into container so that we can dispatch multiple actions instead of the one
+          this.props.dispatch(count());
           switch (this.props.seconds) {
-            case SPACE:
-              console.log("space");
-              this.props.dispatch(setSpace());
-              break;
             case DOT:
-              console.log("dot");
+              this.props.dispatch(playNote(context, 349.23));
               this.props.dispatch(setDot());
               break;
             case LINE:
-              console.log("line");
+              this.props.dispatch(playNote(context, 392.0));
               this.props.dispatch(setLine());
               break;
+            case SPACE:
+              this.props.dispatch(playNote(context, 440));
+              this.props.dispatch(setSpace());
+              break;
             case ADD_LETTER:
-              console.log("letter");
+              this.props.dispatch(playNote(context, 523.25));
               this.props.dispatch(addLetter());
               break;
             default:
               break;
           }
-          this.props.dispatch(count());
         }, TIMER_SPEED);
         this.props.dispatch(setCounterId(counterId));
       }

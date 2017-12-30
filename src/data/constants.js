@@ -1,10 +1,10 @@
 import _ from "lodash";
 // timer settings
-export const SPACE = 5;
-export const DOT = 50;
-export const LINE = 100;
-export const ADD_LETTER = 150;
-export const TIMER_SPEED = 5;
+export const DOT = 1;
+export const LINE = 2;
+export const SPACE = 3;
+export const ADD_LETTER = 4;
+export const TIMER_SPEED = 500;
 
 // SVG circle tree building
 export const HEIGHT_MARGIN = 35;
