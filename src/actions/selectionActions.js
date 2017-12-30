@@ -1,13 +1,28 @@
-export function setAction(seconds) {
+export function setDot() {
   return {
-    type: "SET_ACTION",
-    payload: {
-      seconds
-    }
+    type: "SET_DOT",
   };
 }
 
-export function resetAction() {
+export function setLine() {
+  return {
+    type: "SET_LINE",
+  };
+}
+
+export function setSpace() {
+  return {
+    type: "SET_SPACE",
+  };
+}
+
+export function addLetter() {
+  return {
+    type: "ADD_LETTER",
+  };
+}
+
+export function resetAction() {     
   return {
     type: "RESET_ACTION"
   };

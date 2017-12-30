@@ -3,8 +3,14 @@ import Selection from "../components/selectionComponent";
 import { connect } from "react-redux";
 import { setCounterId, stopCounter, count } from "../actions/counterActions";
 import { addToMessage } from "../actions/messageActions";
-import { setAction, resetAction, selectCircle } from "../actions/selectionActions";
-import { TIMER_SPEED } from "../data/constants";
+import {
+  selectCircle,
+  setDot,
+  setLine,
+  setSpace,
+  addLetter
+} from "../actions/selectionActions";
+import { SPACE, DOT, LINE, ADD_LETTER, TIMER_SPEED } from "../data/constants";
 
 const mapStateToProps = state => {
   return {
@@ -27,7 +33,26 @@ class SelectionContainer extends React.Component {
       if (!this.props.counterId) {
         const counterId = setInterval(() => {
           // may need to refactor setAction and pull the switch statement into container so that we can dispatch multiple actions instead of the one
-          this.props.dispatch(setAction(this.props.seconds));
+          switch (this.props.seconds) {
+            case SPACE:
+              console.log("space");
+              this.props.dispatch(setSpace());
+              break;
+            case DOT:
+              console.log("dot");
+              this.props.dispatch(setDot());
+              break;
+            case LINE:
+              console.log("line");
+              this.props.dispatch(setLine());
+              break;
+            case ADD_LETTER:
+              console.log("letter");
+              this.props.dispatch(addLetter());
+              break;
+            default:
+              break;
+          }
           this.props.dispatch(count());
         }, TIMER_SPEED);
         this.props.dispatch(setCounterId(counterId));
@@ -51,7 +76,6 @@ class SelectionContainer extends React.Component {
           this.props.dispatch(addToMessage(this.props.circleId));
           this.props.dispatch(selectCircle());
         }
-        this.props.dispatch(resetAction());
         this.props.dispatch(stopCounter());
       }
     });

@@ -1,4 +1,4 @@
-import { SPACE, DOT, LINE, ADD_LETTER, ROOT_NODE } from "../data/constants";
+import { ROOT_NODE } from "../data/constants";
 
 export default function reducer(
   state = {
@@ -38,44 +38,38 @@ export default function reducer(
         };
       }
     }
-    case "SET_ACTION":
-      switch (action.payload.seconds) {
-        case SPACE:
-          return {
-            ...state,
-            space: true,
-            dot: false,
-            line: false,
-            addLetter: false
-          };
-        case DOT:
-          return {
-            ...state,
-            space: false,
-            dot: true,
-            line: false,
-            addLetter: false
-          };
-        case LINE:
-          return {
-            ...state,
-            space: false,
-            dot: false,
-            line: true,
-            addLetter: false
-          };
-        case ADD_LETTER:
-          return {
-            ...state,
-            space: false,
-            dot: false,
-            line: false,
-            addLetter: true
-          };
-        default:
-          break;
-      }
-      break;
+    case "SET_DOT":
+      return {
+        ...state,
+        space: false,
+        dot: true,
+        line: false,
+        addLetter: false
+      };
+    case "SET_LINE":
+      return {
+        ...state,
+        space: false,
+        dot: false,
+        line: true,
+        addLetter: false
+      };
+    case "SET_SPACE":
+      return {
+        ...state,
+        space: true,
+        dot: false,
+        line: false,
+        addLetter: false
+      };
+    case "ADD_LETTER":
+      return {
+        ...state,
+        space: false,
+        dot: false,
+        line: false,
+        addLetter: true
+      };
     case "RESET_ACTION":
       return {
         ...state,
