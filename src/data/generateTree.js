@@ -1,17 +1,17 @@
 import _ from "lodash";
 import { NUMBER_OF_LEVELS, RADIUS, VECTORS } from "../data/constants";
 
-let tree = [];
+let circles = [];
 let levelIndexer = _.range(0, NUMBER_OF_LEVELS, 0);
 
 // generateTree has side effects for both tree and levelIndexer
-const generateTree = (data, parent, selected, reset = false) => {
+export const generateCircles = (data, parent, selected, reset = false) => {
   if (reset) {
     levelIndexer = _.range(0, NUMBER_OF_LEVELS, 0);
-    tree = [];
+    circles = [];
   }
-  tree = [
-    ...tree,
+  circles = [
+    ...circles,
     {
       name: data.name,
       childLeft: data.children ? data.children[0] : "",
@@ -28,10 +28,34 @@ const generateTree = (data, parent, selected, reset = false) => {
   levelIndexerCopy[data.level] = levelIndexerCopy[data.level] + 1;
   levelIndexer = levelIndexerCopy;
   if (data.children) {
-    generateTree(data.children[0], data.name, selected);
-    generateTree(data.children[1], data.name, selected);
+    generateCircles(data.children[0], data.name, selected);
+    generateCircles(data.children[1], data.name, selected);
   }
-  return tree;
+  return circles;
 };
 
-export default generateTree;
+export const generateLines = circles => {
+  // grabs the x, y values of the parent, left, and right children for each node
+  const lines = _.map(circles, circle => {
+    const pcx = circle.cx;
+    const pcy = circle.cy;
+
+    const leftChild = _.find(circles, { name: circle.childLeft.name });
+    const lcx = leftChild ? leftChild.cx : undefined;
+    const lcy = leftChild ? leftChild.cy : undefined;
+
+    const rightChild = _.find(circles, { name: circle.childRight.name });
+    const rcx = rightChild ? rightChild.cx : undefined;
+    const rcy = rightChild ? rightChild.cy : undefined;
+
+    return {
+      pcx,
+      pcy,
+      lcx,
+      lcy,
+      rcx,
+      rcy
+    };
+  });
+  return lines;
+};

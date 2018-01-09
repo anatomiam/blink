@@ -1,5 +1,5 @@
 import React from "react";
-import CircleContainer from "./containers/circleContainer";
+import TreeContainer from "./containers/treeContainer";
 import SelectionContainer from "./containers/selectionContainer";
 import MessageContainer from "./containers/messageContainer";
 
@@ -8,7 +8,7 @@ export default class Blink extends React.Component {
     return (
       <React.Fragment>
         <SelectionContainer />
-        <CircleContainer />
+        <TreeContainer />
         <MessageContainer />
       </React.Fragment>
     );

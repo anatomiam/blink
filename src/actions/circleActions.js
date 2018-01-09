@@ -1,8 +1,17 @@
-export function setTree(tree) {
+export function setCircles(circles) {
   return {
-    type: "SET_TREE",
+    type: "SET_CIRCLES",
     payload: {
-      tree
+      circles
+    }
+  };
+}
+
+export function setLines(lines) {
+  return {
+    type: "SET_LINES",
+    payload: {
+      lines
     }
   };
 }

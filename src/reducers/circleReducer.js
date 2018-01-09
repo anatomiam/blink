@@ -1,15 +1,23 @@
 export default function reducer(
   state = {
-    tree: [],
+    circles: [],
+    lines: []
   },
   action
 ) {
   switch (action.type) {
-    case "SET_TREE": {
-      const { tree } = action.payload;
+    case "SET_CIRCLES": {
+      const { circles } = action.payload;
       return {
         ...state,
-        tree
+        circles
+      };
+    }
+    case "SET_LINES": {
+      const { lines } = action.payload;
+      return {
+        ...state,
+        lines
       };
     }
     default:
