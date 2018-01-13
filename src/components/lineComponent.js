@@ -5,8 +5,8 @@ export default class Line extends React.Component {
   render() {
     const { pcx, pcy, lcx, lcy, rcy, rcx } = this.props.line;
 
-    const parentAngleL = Math.atan2(pcy - lcy, pcx - lcx);
-    const parentAngleR = Math.atan2(pcy - rcy, pcx - rcx);
+    const parentAngleL = Math.atan2(lcy - pcy, lcx - pcx);
+    const parentAngleR = Math.atan2(rcy - pcy, rcx - pcx);
 
     const childAngleL = Math.atan2(pcy - lcy, pcx - lcx);
     const childAngleR = Math.atan2(pcy - rcy, pcx - rcx);
