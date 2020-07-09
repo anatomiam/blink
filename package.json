@@ -6,7 +6,7 @@
     "react-scripts": "3.3.0"
   },
   "dependencies": {
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.19",
     "react": "^16",
     "react-dom": "^16",
     "react-redux": "^5.0.6",
